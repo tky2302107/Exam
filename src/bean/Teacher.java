@@ -1,4 +1,4 @@
-// 萩原
+// 萩原先生
 package bean;
 
 import java.io.Serializable;
