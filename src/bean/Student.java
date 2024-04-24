@@ -1,7 +1,7 @@
 package bean;
 
 import java.io.Serializable;
-
+//コメント
 public class Student implements Serializable{
 	private String no;
 	private String name;
