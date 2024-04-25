@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDao;
-import dao.StudentDao;
 import tool.Action;
 
 public class StudentCreateAction extends Action {
@@ -39,31 +38,33 @@ public class StudentCreateAction extends Action {
 			String name="";
 			Integer entYear = 0;
 			List<Student> students = null;
-//			Boolean check ;
 			LocalDate todaysDate = LocalDate.now();
 			int year = todaysDate.getYear();
-			StudentDao sDao = new StudentDao();
+//			StudentDao sDao = new StudentDao();
 			ClassNumDao cNumDao = new ClassNumDao();
-			Student student = new Student();
+//			Student student = new Student();
 			Map<String,String> errors =new HashMap<>();
-			int chk = 0;
 			
+//			students = sDao.get(no);
 			
 			entYearStr = req.getParameter("ent_year");
 			classNum = req.getParameter("class_num");
 			no = req.getParameter("no");
 			name = req.getParameter("name");
 			
+			
+			System.out.println(no);
+			
+			
 			if (entYearStr != null){
 				entYear = Integer.parseInt(entYearStr);
 			}else{
 				entYear = 0;
 			}
-			student = sDao.get(no);
-//			student_two = sDao.get(no);
 			
+			int chk = 0;
 			List<String> list = cNumDao.filter(teacher.getSchool());//　クラスの一覧
-			if (entYear == 0 || entYearStr == null){
+			if (entYear == 0 ){// || entYearStr == null
 				if (chk > 0){
 					System.out.println("if");
 					errors.put("entYear", "入学年度を選択してください");
@@ -74,7 +75,7 @@ public class StudentCreateAction extends Action {
 					chk += 1;
 					System.out.println(chk);
 				}
-			}else if (no.equals(null) || no.equals("")){
+			}else if (no.equals(null)|| no.equals("")){ 
 				errors.put("no", "このフィールドを入力してください");
 				System.out.println("NO"+req.getParameter("no"));
 				req.setAttribute("errors2", errors);
@@ -87,36 +88,16 @@ public class StudentCreateAction extends Action {
 				System.out.println("CLA"+req.getParameter("classNum"));
 				req.setAttribute("errors4", errors);
 			}else{
-//				System.out.println(no);
 				
-//				System.out.println(student_two);
-//				System.out.println("e00"+student_two.getNo()+":"+no);
+//				Map<String,String> data = new HashMap<>();
+//				data.put("no", no);
+				req.setAttribute("execute_no",no);
+				req.setAttribute("execute_name",name);
+				req.setAttribute("execute_classNum",classNum);
+				req.setAttribute("execute_entYear",entYear);
 				
-				try{
-					if(student.getNo()==no){
-						errors.put("duplication", "学生番号が重複しています");
-						System.out.println("e01");
-						req.setAttribute("errors5", errors);
-					}else{
-						student.setNo(no);
-						student.setName(name);
-						student.setentYear(entYear);
-						student.setClassNum(classNum);
-						student.setAttend(true);
-						student.setSchool(teacher.getSchool());
-						sDao.save(student);
-						req.getRequestDispatcher("student_create_done.jsp").forward(req, res);
-					}
-				}catch (NullPointerException e){
-					student.setNo(no);
-					student.setName(name);
-					student.setentYear(entYear);
-					student.setClassNum(classNum);
-					student.setAttend(true);
-					student.setSchool(teacher.getSchool());
-					sDao.save(student);
-					req.getRequestDispatcher("student_create_done.jsp").forward(req, res);
-				}
+				req.getRequestDispatcher("/StudentUpdateExecute.Action").forward(req, res);
+				return;
 			}
 			// 年設定プルダウン
 			if (entYearStr != null){
