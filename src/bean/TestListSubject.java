@@ -1,6 +1,8 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestListSubject implements Serializable{
 	private int entYear;
