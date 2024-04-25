@@ -23,13 +23,10 @@ public class StudentCreateAction extends Action {
 			Teacher teacher = (Teacher)session.getAttribute("user");
 			
 			
-			
-			
 			req.setAttribute("entYear", 0);
 			req.setAttribute("classNum", null);
 			req.setAttribute("no", "学生番号を入力してください");
 			req.setAttribute("name", "氏名を入力してください");
-			
 			
 			
 			String entYearStr="";
@@ -88,15 +85,21 @@ public class StudentCreateAction extends Action {
 				System.out.println("CLA"+req.getParameter("classNum"));
 				req.setAttribute("errors4", errors);
 			}else{
+//				StudentCreateExecuteAction scea = new StudentCreateExecuteAction();
+				Map<String,String> data = new HashMap<>();
+				data.put("no", no);
+				data.put("name", name);
+				data.put("classNum", classNum);
+				data.put("entYear", String.valueOf(entYear));
 				
-//				Map<String,String> data = new HashMap<>();
-//				data.put("no", no);
-				req.setAttribute("execute_no",no);
-				req.setAttribute("execute_name",name);
-				req.setAttribute("execute_classNum",classNum);
-				req.setAttribute("execute_entYear",entYear);
+//				req.setAttribute("execute_no",no);
+//				req.setAttribute("execute_name",name);
+//				req.setAttribute("execute_classNum",classNum);
+//				req.setAttribute("execute_entYear",entYear);
 				
-				req.getRequestDispatcher("/StudentUpdateExecute.Action").forward(req, res);
+				req.getRequestDispatcher("/StudentCreateExecuteAction").forward(req, res);
+				
+				
 				return;
 			}
 			// 年設定プルダウン

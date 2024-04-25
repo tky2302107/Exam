@@ -1,4 +1,4 @@
-package scoremanager;
+package scoremanager.main;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,7 @@ import bean.Student;
 import bean.Teacher;
 import dao.StudentDao;
 import tool.Action;
-
+//@WebServlet(urlPatterns={"scoremanager.main/StudentCreateExecuteAction"})
 public class StudentCreateExecuteAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) 
 			throws Exception {
