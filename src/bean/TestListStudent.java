@@ -1,5 +1,4 @@
 package bean;
-//かえぽよ
 
 import java.io.Serializable;
 

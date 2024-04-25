@@ -1,4 +1,3 @@
-// 萩原先生
 package bean;
 
 import java.io.Serializable;
