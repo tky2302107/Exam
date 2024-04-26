@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import tool.Action;
+
 //import bean.Teacher;
 //import dao.TeacherDao;
 
-public class LogoutAction {
+public class LogoutAction extends Action{
 //@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 //		セッションからユーザーデータを削除するプログラムを追加したい
@@ -39,7 +41,7 @@ public class LogoutAction {
 //			HttpSession session = req.getSession(true);
 //
 //			session.invalidate();// ←セッション破棄
-			
+//			System.out.println("!(*_*)!");
 			HttpSession session = req.getSession(true);
 			if(session != null){
 				session.invalidate();
@@ -48,7 +50,7 @@ public class LogoutAction {
 //			req.getRequestDispatcher("login.jsp").forward(req, res);
 //			res.sendRedirect("login.jsp");
 			
-	        RequestDispatcher dispatcher =  req.getRequestDispatcher("scoremanager/login.jsp");
+	        RequestDispatcher dispatcher =  req.getRequestDispatcher("/scoremanager/logout.jsp");
 	        dispatcher.forward(req, res);
 
 //			} else {

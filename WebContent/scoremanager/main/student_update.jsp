@@ -5,11 +5,11 @@
 	<c:param name = "title">
 		得点管理システム
 	</c:param>
-	<c:param name = "scriipts">	</c:param>
+	<c:param name = "scripts">	</c:param>
 	<c:param name = "content">
 		<section class="mo-4">
-		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4">学生情報変更</h2>
-		<form method="get">
+		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">学生情報変更</h2>
+		<form method="get" action="StudentUpdateExecute.action">
 			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 				<div >
 					<label class="form-label" for="student-f2-select">入学年度</label>
@@ -42,9 +42,10 @@
 					<label class="form-label" >在学中</label>
 					<input type="checkbox" name="is_attend" ></input>
 				</div>
-				<br>
+				
 				<div>
-					<button class="btn btn-secondary" id="filter-button" name="end">変更</button>
+					<br>
+					<input type="submit" value="変更" class="btn btn-secondary">
 				</div>
 				<br>
 				<div><a href="./menu.jsp">戻る</a></div>
