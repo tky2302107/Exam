@@ -16,6 +16,11 @@
 			<br>
 			<br>
 			<br>
+			<%@ page import="javax.servlet.http.HttpSession"%>
+			<%@ page  import="bean.Teacher" %>
+			<% HttpSession sessionjsp = request.getSession();%>
+			<% Teacher teacher = (Teacher)sessionjsp.getAttribute("user");%>
+			<% request.setAttribute("", teacher); %>
 			<div><a href="./student_list.jsp">学生一覧</a></div>
 		</section>
 	</c:param>

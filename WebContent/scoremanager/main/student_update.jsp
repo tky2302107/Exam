@@ -9,25 +9,27 @@
 	<c:param name = "content">
 		<section class="mo-4">
 		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">学生情報変更</h2>
-		<form method="get" action="StudentUpdateExecute.action">
+		<form action="StudentUpdateExecute.action">
 			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
-				<div >
+				<div>
 					<label class="form-label" for="student-f2-select">入学年度</label>
-					<Input readonly value="${ent_year}" class="form-control"></Input>
+					<Input readonly value="${ent_year}"name="ent_year" class="form-control"></Input>
 					
+					<%-- <%=request.setParameter("",request.getAttribute("ent_year")) %> --%>
+					<% System.out.println("jsp:"+request.getAttribute("no")); %>
 				</div>
-				<div >
+				<div>
 					<label class="form-label" for="student-f2-select">学生番号</label>
-					<Input readonly value="${no}" class="form-control"></Input>
+					<Input readonly value="${no}" name="no" class="form-control"></Input>
 					
 				</div>
-				<div >
+				<div>
 					<label class="form-label" for="student-f2-select">氏名</label>
 					<Input class="form-control" name="name"value="${name}"maxlength="30"required></Input>
 					
 					<%-- <div class="mt-2 text-warning">${errors3.get("name")}</div> --%>
 				</div>
-				<div >
+				<div>
 					<label class="form-label" for="student-f3-select">クラス</label>
 					<select class="form-select" id= "student-class_num-select" name="class_num"required>
 						<option value="0">--------<option>

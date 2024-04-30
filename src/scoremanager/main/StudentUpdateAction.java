@@ -31,22 +31,23 @@ public class StudentUpdateAction extends Action{
 		ClassNumDao cn = new ClassNumDao();
 		
 		String gclassnum = sdaoget.getClassNum();
-		int gentyear = sdaoget.getEntYear();
-		School gschool = sdaoget.getSchool();
-		int gschoolyear = sdaoget.getSchoolYear();
+		int ent_year = sdaoget.getEntYear();
+		School school = sdaoget.getSchool();
+		int schoolYear = sdaoget.getSchoolYear();
 		List<Student> students = null;
 		StudentDao cls = new StudentDao();
 		
 		
-		students = cls.filter(teacher.getSchool(),gentyear, gclassnum, true);
-		req.setAttribute("no", gno);
+		students = cls.filter(teacher.getSchool(),ent_year, gclassnum, true);
+		req.setAttribute("gno", String.valueOf(gno));
 		req.setAttribute("name", gname);
 		req.setAttribute("class_num_set", cn.filter(teacher.getSchool()));
-		req.setAttribute("ent_year", gentyear);
-		req.setAttribute("school", gschool);
-		req.setAttribute("schoolYear", gschoolyear);
+		req.setAttribute("ent_year", String.valueOf(ent_year));
+		req.setAttribute("school", school);
+		req.setAttribute("schoolYear", schoolYear);
 		req.setAttribute("students", students);
-		System.out.println("(・_・)");
-;		req.getRequestDispatcher("student_update.jsp").forward(req, res);
+		req.setAttribute("no", String.valueOf(gno));
+		req.setAttribute("ent_year", String.valueOf(ent_year));
+		req.getRequestDispatcher("student_update.jsp").forward(req, res);
 	}
 }

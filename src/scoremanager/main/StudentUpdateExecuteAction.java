@@ -12,26 +12,32 @@ public class StudentUpdateExecuteAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 //		HttpSession session = req.getSession();
 //		Teacher teacher = (Teacher)session.getAttribute("user");     
-		
-		String name = req.getParameter("no");
-		String no = req.getParameter("name"); 
-		String classNum = req.getParameter("class_num");
 		String entYearStr = req.getParameter("ent_year");
+		String name = req.getParameter("name");
+		String no = req.getParameter("no"); 
+		String classNum = req.getParameter("class_num");
 		String isAttend = req.getParameter("is_attend");
-		Boolean flg = null;
 		Student student = new Student();
 		StudentDao sDao = new StudentDao();
+		System.out.println(isAttend);
+		boolean isAttend1 = false;
+		if (isAttend == null){
+			isAttend1 = false;
+		}else if (isAttend.equals("on")){
+			isAttend1 = true;
+		}else{
+			isAttend1 = false;
+		}
+		System.out.println(isAttend1);
 		
 		student.setNo(no);
 		student.setName(name);
 		student.setentYear(Integer.parseInt(entYearStr));
 		student.setClassNum(classNum);
-		student.setAttend(Boolean.valueOf(isAttend));
-//		student.setSchool(teacher.getSchool());
-		flg = sDao.save(student);
-		System.out.println(flg);
+		student.setAttend(isAttend1);
+		sDao.save(student);
 		
-		req.getRequestDispatcher("").forward(req, res);
+		req.getRequestDispatcher("student_update_done.jsp").forward(req, res);
 	}
 }
 
