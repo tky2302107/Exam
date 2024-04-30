@@ -49,19 +49,21 @@
                     </div>
                 </div>
             </form>
-            <c:if test="${error == 'missingCriteria'}">
+            <c:if test="${not empty error}">
                 <div class="alert alert-warning mx-3" role="alert">
                     入学年度とクラスと科目を選択してください
                 </div>
             </c:if>
-            <c:if test="${empty results}">
-                <div class="alert alert-info mx-3" role="alert">
+            <c:if test="${not empty students}">
+                <!-- 成績情報がある場合の表示 -->
+            </c:if>
+            <c:if test="${empty students && not empty error}">
+                <div class="alert alert-warning mx-3" role="alert">
                     学生情報が存在しませんでした
                 </div>
             </c:if>
             <div class="text-start text-muted mb-3 mx-3">
                 <p style="color: aqua;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
-            </div>
         </section>
     </c:param>
 </c:import>
