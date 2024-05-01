@@ -1,6 +1,9 @@
 package scoremanager.main;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,12 +12,14 @@ import javax.servlet.http.HttpSession;
 
 import bean.Student;
 import bean.Teacher;
+import dao.ClassNumDao;
 import dao.StudentDao;
 import tool.Action;
 //@WebServlet(urlPatterns={"scoremanager.main/StudentCreateExecuteAction"})
 public class StudentCreateExecuteAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) 
 			throws Exception {
+		System.out.println("SCEA");
 		HttpSession session = req.getSession();
 		Teacher teacher = (Teacher)session.getAttribute("user");
 		Map<String,String> errors =new HashMap<>();
@@ -22,10 +27,10 @@ public class StudentCreateExecuteAction extends Action{
 		Student student = new Student();
 		
 		
-		String no = req.getParameter("execute_no");
-		String name = req.getParameter("execute_name");
-		String classNum = req.getParameter("execute_classNum");
-		int entYear = Integer.parseInt(req.getParameter("execute_entYear"));
+		String no = req.getParameter("no");
+		String name = req.getParameter("name");
+		String classNum = req.getParameter("class_num");
+		int entYear = Integer.parseInt(req.getParameter("ent_year"));
 		
 		
 //		if (entYearStr != null){
@@ -60,9 +65,27 @@ public class StudentCreateExecuteAction extends Action{
 		}else{
 			errors.put("duplication", "学生番号が重複しています");
 			System.out.println("e01");
+			req.setAttribute("eee", "eee");
 			req.setAttribute("errors5", errors);
+			req.setAttribute("no", no);
+			req.setAttribute("name", name);
+			req.setAttribute("class_num", classNum);
+			req.setAttribute("ent_year", entYear);
+			
+			ClassNumDao cNumDao = new ClassNumDao();
+			List<String> list = cNumDao.filter(teacher.getSchool());//　クラスの一覧
+			req.setAttribute("class_num_set", list);
+			
+			List<Integer> entYearSet = new ArrayList<>();
+			LocalDate todaysDate = LocalDate.now();
+			int year = todaysDate.getYear();
+			for (int i = year -10 ; i<year+1 ; i++ ){
+				entYearSet.add(i);
+			}
+			req.setAttribute("ent_year_set", entYearSet);
+			req.getRequestDispatcher("student_create.jsp").forward(req, res);// StudentCreate.action
 		}
-//		req.getRequestDispatcher("StudentCreateAction.java").forward(req, res);
+//		req.getRequestDispatcher("StudentCreate.action").forward(req, res);
 		
 	}
 }

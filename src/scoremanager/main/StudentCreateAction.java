@@ -18,11 +18,15 @@ import tool.Action;
 public class StudentCreateAction extends Action {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse res) 
-			throws Exception {//　ユーザーデータを取得＆セレクトボックス用のクラスデータを取得		
+			throws Exception {// ユーザーデータを取得＆セレクトボックス用のクラスデータを取得		
 			HttpSession session = req.getSession();
 			Teacher teacher = (Teacher)session.getAttribute("user");
 			
-			
+			System.out.println("SCA");
+			String e5 = req.getParameter("errors5");
+			String eee = req.getParameter("eee");
+			System.out.println("eee:"+eee);
+			System.out.println("e5"+e5);
 			req.setAttribute("entYear", 0);
 			req.setAttribute("classNum", null);
 			req.setAttribute("no", "学生番号を入力してください");
@@ -37,12 +41,8 @@ public class StudentCreateAction extends Action {
 			List<Student> students = null;
 			LocalDate todaysDate = LocalDate.now();
 			int year = todaysDate.getYear();
-//			StudentDao sDao = new StudentDao();
 			ClassNumDao cNumDao = new ClassNumDao();
-//			Student student = new Student();
 			Map<String,String> errors =new HashMap<>();
-			
-//			students = sDao.get(no);
 			
 			entYearStr = req.getParameter("ent_year");
 			classNum = req.getParameter("class_num");
@@ -50,8 +50,8 @@ public class StudentCreateAction extends Action {
 			name = req.getParameter("name");
 			
 			
-			System.out.println(no);
-			
+			System.out.println("no"+no);
+			e5 = null;
 			
 			if (entYearStr != null){
 				entYear = Integer.parseInt(entYearStr);
@@ -61,47 +61,48 @@ public class StudentCreateAction extends Action {
 			
 			int chk = 0;
 			List<String> list = cNumDao.filter(teacher.getSchool());//　クラスの一覧
-			if (entYear == 0 ){// || entYearStr == null
-				if (chk > 0){
-					System.out.println("if");
-					errors.put("entYear", "入学年度を選択してください");
-					System.out.println("Aroot:"+entYear);
-					System.out.println("ENT"+req.getParameter("entYear"));
-					req.setAttribute("errors1", errors);
+//			if (eee == null){
+				if (entYear == 0 ){// || entYearStr == null
+					if (chk > 0){
+						System.out.println("if");
+						errors.put("entYear", "入学年度を選択してください");
+						System.out.println("Aroot:"+entYear);
+						System.out.println("ENT"+req.getParameter("entYear"));
+						req.setAttribute("errors1", errors);
+					}else{
+						chk += 1;
+						System.out.println(chk);
+					}
+				}else if (no.equals(null)|| no.equals("")){ 
+					errors.put("no", "このフィールドを入力してください");
+					System.out.println("NO1"+req.getParameter("no"));
+					req.setAttribute("errors2", errors);
+				}else if (name.equals(null) || name.equals("")){
+					errors.put("name", "このフィールドを入力してください");
+					System.out.println("NAM"+req.getParameter("name"));
+					req.setAttribute("errors3", errors);
+				}else if (classNum == "" || classNum.equals(null) || classNum.equals("0")){
+					errors.put("classNum", "このフィールドを入力してください");
+					System.out.println("CLA"+req.getParameter("classNum"));
+					req.setAttribute("errors4", errors);
 				}else{
-					chk += 1;
-					System.out.println(chk);
+	//				StudentCreateExecuteAction scea = new StudentCreateExecuteAction();
+					Map<String,String> data = new HashMap<>();
+					data.put("no", no);
+					data.put("name", name);
+					data.put("classNum", classNum);
+					data.put("entYear", String.valueOf(entYear));
+					
+					req.getRequestDispatcher("StudentCreateExecute.action").forward(req, res);
+					
+					
+					return;
 				}
-			}else if (no.equals(null)|| no.equals("")){ 
-				errors.put("no", "このフィールドを入力してください");
-				System.out.println("NO"+req.getParameter("no"));
-				req.setAttribute("errors2", errors);
-			}else if (name.equals(null) || name.equals("")){
-				errors.put("name", "このフィールドを入力してください");
-				System.out.println("NAM"+req.getParameter("name"));
-				req.setAttribute("errors3", errors);
-			}else if (classNum == "" || classNum.equals(null) || classNum.equals("0")){
-				errors.put("classNum", "このフィールドを入力してください");
-				System.out.println("CLA"+req.getParameter("classNum"));
-				req.setAttribute("errors4", errors);
-			}else{
-//				StudentCreateExecuteAction scea = new StudentCreateExecuteAction();
-				Map<String,String> data = new HashMap<>();
-				data.put("no", no);
-				data.put("name", name);
-				data.put("classNum", classNum);
-				data.put("entYear", String.valueOf(entYear));
-				
-//				req.setAttribute("execute_no",no);
-//				req.setAttribute("execute_name",name);
-//				req.setAttribute("execute_classNum",classNum);
-//				req.setAttribute("execute_entYear",entYear);
-				
-				req.getRequestDispatcher("/StudentCreateExecuteAction").forward(req, res);
-				
-				
-				return;
-			}
+//			}else{
+//				errors.put("duplication", e5);
+//				System.out.println("NO2"+req.getParameter("no"));
+//				req.setAttribute("errors5", errors);
+//			}
 			// 年設定プルダウン
 			if (entYearStr != null){
 				entYear = Integer.parseInt(entYearStr);
