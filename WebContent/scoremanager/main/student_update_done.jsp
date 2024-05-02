@@ -21,7 +21,7 @@
 			<% HttpSession sessionjsp = request.getSession();%>
 			<% Teacher teacher = (Teacher)sessionjsp.getAttribute("user");%>
 			<% request.setAttribute("", teacher); %>
-			<div><a href="./student_list.jsp">学生一覧</a></div>
+			<div><a href="StudentList.action">学生一覧</a></div><!-- ./student_list.jsp -->
 		</section>
 	</c:param>
 </c:import>

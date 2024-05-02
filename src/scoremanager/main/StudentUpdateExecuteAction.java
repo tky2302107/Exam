@@ -7,11 +7,8 @@ import bean.Student;
 import dao.StudentDao;
 import tool.Action;
 
-
 public class StudentUpdateExecuteAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-//		HttpSession session = req.getSession();
-//		Teacher teacher = (Teacher)session.getAttribute("user");     
 		String entYearStr = req.getParameter("ent_year");
 		String name = req.getParameter("name");
 		String no = req.getParameter("no"); 
@@ -19,7 +16,7 @@ public class StudentUpdateExecuteAction extends Action{
 		String isAttend = req.getParameter("is_attend");
 		Student student = new Student();
 		StudentDao sDao = new StudentDao();
-		System.out.println(isAttend);
+
 		boolean isAttend1 = false;
 		if (isAttend == null){
 			isAttend1 = false;
@@ -28,7 +25,6 @@ public class StudentUpdateExecuteAction extends Action{
 		}else{
 			isAttend1 = false;
 		}
-		System.out.println(isAttend1);
 		
 		student.setNo(no);
 		student.setName(name);

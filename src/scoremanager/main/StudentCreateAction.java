@@ -22,16 +22,10 @@ public class StudentCreateAction extends Action {
 			HttpSession session = req.getSession();
 			Teacher teacher = (Teacher)session.getAttribute("user");
 			
-			System.out.println("SCA");
-			String e5 = req.getParameter("errors5");
-			String eee = req.getParameter("eee");
-			System.out.println("eee:"+eee);
-			System.out.println("e5"+e5);
 			req.setAttribute("entYear", 0);
 			req.setAttribute("classNum", null);
 			req.setAttribute("no", "学生番号を入力してください");
 			req.setAttribute("name", "氏名を入力してください");
-			
 			
 			String entYearStr="";
 			String classNum="";
@@ -49,10 +43,6 @@ public class StudentCreateAction extends Action {
 			no = req.getParameter("no");
 			name = req.getParameter("name");
 			
-			
-			System.out.println("no"+no);
-			e5 = null;
-			
 			if (entYearStr != null){
 				entYear = Integer.parseInt(entYearStr);
 			}else{
@@ -60,33 +50,24 @@ public class StudentCreateAction extends Action {
 			}
 			
 			int chk = 0;
-			List<String> list = cNumDao.filter(teacher.getSchool());//　クラスの一覧
-//			if (eee == null){
-				if (entYear == 0 ){// || entYearStr == null
+			List<String> list = cNumDao.filter(teacher.getSchool());// クラスの一覧
+				if (entYear == 0 ){
 					if (chk > 0){
-						System.out.println("if");
 						errors.put("entYear", "入学年度を選択してください");
-						System.out.println("Aroot:"+entYear);
-						System.out.println("ENT"+req.getParameter("entYear"));
 						req.setAttribute("errors1", errors);
 					}else{
 						chk += 1;
-						System.out.println(chk);
 					}
 				}else if (no.equals(null)|| no.equals("")){ 
 					errors.put("no", "このフィールドを入力してください");
-					System.out.println("NO1"+req.getParameter("no"));
 					req.setAttribute("errors2", errors);
 				}else if (name.equals(null) || name.equals("")){
 					errors.put("name", "このフィールドを入力してください");
-					System.out.println("NAM"+req.getParameter("name"));
 					req.setAttribute("errors3", errors);
 				}else if (classNum == "" || classNum.equals(null) || classNum.equals("0")){
 					errors.put("classNum", "このフィールドを入力してください");
-					System.out.println("CLA"+req.getParameter("classNum"));
 					req.setAttribute("errors4", errors);
 				}else{
-	//				StudentCreateExecuteAction scea = new StudentCreateExecuteAction();
 					Map<String,String> data = new HashMap<>();
 					data.put("no", no);
 					data.put("name", name);
@@ -95,14 +76,8 @@ public class StudentCreateAction extends Action {
 					
 					req.getRequestDispatcher("StudentCreateExecute.action").forward(req, res);
 					
-					
 					return;
 				}
-//			}else{
-//				errors.put("duplication", e5);
-//				System.out.println("NO2"+req.getParameter("no"));
-//				req.setAttribute("errors5", errors);
-//			}
 			// 年設定プルダウン
 			if (entYearStr != null){
 				entYear = Integer.parseInt(entYearStr);

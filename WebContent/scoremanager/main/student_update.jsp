@@ -16,7 +16,7 @@
 					<Input readonly value="${ent_year}"name="ent_year" class="form-control"></Input>
 					
 					<%-- <%=request.setParameter("",request.getAttribute("ent_year")) %> --%>
-					<% System.out.println("jsp:"+request.getAttribute("no")); %>
+					
 				</div>
 				<div>
 					<label class="form-label" for="student-f2-select">学生番号</label>
