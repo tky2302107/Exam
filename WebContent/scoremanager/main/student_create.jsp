@@ -24,13 +24,13 @@
 				</div>
 				<div >
 					<label class="form-label" for="student-f2-select">学生番号</label>
-					<Input class="form-control" name="no"value="${no}"maxlength="10"required></Input>
+					<Input class="form-control" name="no"value="${no}"maxlength="10"required placeholder="学生番号を入力してください"></Input>
 					<%-- <div class="mt-2 text-warning">${errors2.get("no")}</div> --%>
 					<div class="mt-2 text-warning">${errors5.get("duplication")}</div>
 				</div>
 				<div >
 					<label class="form-label" for="student-f2-select">氏名</label>
-					<Input class="form-control" name="name"value="${name}"maxlength="30"required></Input>
+					<Input class="form-control" name="name"value="${name}"maxlength="30"required placeholder="氏名を入力してください"></Input>
 					<%-- <div class="mt-2 text-warning">${errors3.get("name")}</div> --%>
 				</div>
 				<div >

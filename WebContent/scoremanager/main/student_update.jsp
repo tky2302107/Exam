@@ -25,7 +25,7 @@
 				</div>
 				<div>
 					<label class="form-label" for="student-f2-select">氏名</label>
-					<Input class="form-control" name="name"value="${name}"maxlength="30"required></Input>
+					<Input class="form-control" name="name"value="${name}"maxlength="30"required placeholder="氏名を入力してください"></Input>
 					
 					<%-- <div class="mt-2 text-warning">${errors3.get("name")}</div> --%>
 				</div>
