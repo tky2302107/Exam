@@ -46,7 +46,7 @@
 				</div>
 				<br>
 				<div>
-					<button class="btn btn-secondary" id="filter-button" name="end">登録して終了</button>
+					<button class="btn btn-secondary" id="filter-button" name="end" >登録して終了</button>
 				</div>
 				<br>
 				<div><a href="./menu.jsp">戻る</a></div>

@@ -18,21 +18,16 @@ import tool.Action;
 
 public class StudentCreateAction extends Action {
 	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) 
-			throws Exception {//　ユーザーデータを取得＆セレクトボックス用のクラスデータを取得		
+	public void execute(HttpServletRequest req, HttpServletResponse res)
+			throws Exception {//　ユーザーデータを取得＆セレクトボックス用のクラスデータを取得
 			HttpSession session = req.getSession();
 			Teacher teacher = (Teacher)session.getAttribute("user");
-			
-			
-			
-			
+
 			req.setAttribute("entYear", 0);
 			req.setAttribute("classNum", null);
 			req.setAttribute("no", "学生番号を入力してください");
 			req.setAttribute("name", "氏名を入力してください");
-			
-			
-			
+
 			String entYearStr="";
 			String classNum="";
 			String no="";
@@ -47,13 +42,12 @@ public class StudentCreateAction extends Action {
 			Student student = new Student();
 			Map<String,String> errors =new HashMap<>();
 			int chk = 0;
-			
-			
+
 			entYearStr = req.getParameter("ent_year");
 			classNum = req.getParameter("class_num");
 			no = req.getParameter("no");
 			name = req.getParameter("name");
-			
+
 			if (entYearStr != null){
 				entYear = Integer.parseInt(entYearStr);
 			}else{
@@ -61,7 +55,7 @@ public class StudentCreateAction extends Action {
 			}
 			student = sDao.get(no);
 //			student_two = sDao.get(no);
-			
+
 			List<String> list = cNumDao.filter(teacher.getSchool());//　クラスの一覧
 			if (entYear == 0 || entYearStr == null){
 				if (chk > 0){
@@ -88,10 +82,10 @@ public class StudentCreateAction extends Action {
 				req.setAttribute("errors4", errors);
 			}else{
 //				System.out.println(no);
-				
+
 //				System.out.println(student_two);
 //				System.out.println("e00"+student_two.getNo()+":"+no);
-				
+
 				try{
 					if(student.getNo()==no){
 						errors.put("duplication", "学生番号が重複しています");
@@ -126,16 +120,16 @@ public class StudentCreateAction extends Action {
 			for (int i = year -10 ; i<year+1 ; i++ ){
 				entYearSet.add(i);
 			}
-			
+
 			req.setAttribute("ent_year", entYear);
 			req.setAttribute("no", no);
 			req.setAttribute("name", name);
 			req.setAttribute("class_num", classNum);
-			
+
 			req.setAttribute("students", students);
 			req.setAttribute("class_num_set", list);
 			req.setAttribute("ent_year_set", entYearSet);
-			
+
 			req.getRequestDispatcher("student_create.jsp").forward(req, res);
 	}
 }
