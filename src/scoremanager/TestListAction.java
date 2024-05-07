@@ -10,8 +10,6 @@ import java.util.List;
 
 import bean.Test;
 
-
-
 public class TestListAction {
     public List<Test> execute() {
         List<Test> testList = new ArrayList<>();

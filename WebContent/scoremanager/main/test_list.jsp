@@ -8,7 +8,7 @@
     <c:param name="content">
         <section class="me-4">
             <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">成績参照</h2>
-            <form method="get">
+            <form method="get" action="TestListServlet">
                 <div class="border mx-3 mb-3 rounded p-3">
                     <div class="row align-items-center">
                         <div class="col-2">

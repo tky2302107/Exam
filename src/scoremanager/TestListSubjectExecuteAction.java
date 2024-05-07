@@ -1,6 +1,7 @@
 package scoremanager;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,12 @@ import bean.Test;
 public class TestListSubjectExecuteAction {
     public List<Test> execute(String subject) {
         List<Test> testList = new ArrayList<>();
-        try (Connection connection = DatabaseConfig.getConnection()) {
+        // データベース接続情報
+        String url = "jdbc:h2:tcp://localhost/~/exam";
+        String username = "sa";
+        String password = "";
+
+        try (Connection connection = DriverManager.getConnection(url, username, password)) {
             String query = "SELECT * FROM test_scores WHERE subject = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, subject);
@@ -32,3 +38,5 @@ public class TestListSubjectExecuteAction {
         return testList;
     }
 }
+
+
