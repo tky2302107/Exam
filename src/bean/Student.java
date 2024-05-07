@@ -1,6 +1,7 @@
 package bean;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Student implements Serializable{
 	private String no;
@@ -46,9 +47,8 @@ public class Student implements Serializable{
 	public void setSchool(School school) {
 		this.school = school;
 	}
-//	public int getSchoolYear() {
-////		int nendo = 1;
-//		final int nendo = LocalDate.now().minusMonths(3).getYear();
-//		return nendo;
-//	}
+	public int getSchoolYear() {
+		final int nendo = LocalDate.now().minusMonths(3).getYear();
+		return nendo;
+	}
 }

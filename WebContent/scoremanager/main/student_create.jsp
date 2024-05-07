@@ -8,7 +8,7 @@
 	<c:param name = "scriipts">	</c:param>
 	<c:param name = "content">
 		<section class="mo-4">
-		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4">学生情報登録</h2>
+		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">学生情報登録</h2>
 		<form method="get">
 			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 				<div >
@@ -46,7 +46,8 @@
 				</div>
 				<br>
 				<div>
-					<button class="btn btn-secondary" id="filter-button" name="end">登録して終了</button>
+					<br>
+					<button class="btn btn-secondary" id="filter-button" name="end" style="background-color:#0d6efd;">変更</button>
 				</div>
 				<br>
 				<div><a href="./menu.jsp">戻る</a></div>

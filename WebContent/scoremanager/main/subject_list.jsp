@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:import url="/common/base.jsp">
@@ -12,3 +13,5 @@
 
 <c:import url="/common/footer.jsp" />
 r.jsp" />
+=======
+>>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
