@@ -1,13 +1,15 @@
 package bean;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestListSubject implements Serializable{
 	private int entYear;
 	private String studentNo;
 	private String studentName;
 	private String classNum;
-//	private Map<integer,integer> points = new HashMap<>();
+	private Map<Integer,Integer> points = new HashMap<>();
 
 	public int getEntYear(){
 		return entYear;
@@ -33,4 +35,16 @@ public class TestListSubject implements Serializable{
 	public void setClassNum(String classNum){
 		this.classNum = classNum;
 	}
+	public Map<Integer,Integer> getPoints(){
+		return points;
+	}
+	public void setPoints(Map<Integer,Integer> points){
+	    this.points = points;
+    }
+    public  Map<Integer,Integer> points(){
+        return points;
+    }
+    public void putPint(){
+    	return;
+    }
 }
