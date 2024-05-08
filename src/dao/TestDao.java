@@ -16,6 +16,7 @@ import bean.Test;
 
 public class TestDao extends Dao{
 
+
 	private String baseSql = "select * from test";
 
 	public Test get(Student student,Subject subject,School school,int no) throws Exception{
