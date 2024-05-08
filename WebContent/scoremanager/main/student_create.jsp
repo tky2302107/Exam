@@ -46,7 +46,6 @@
 				</div>
 				<br>
 				<div>
-					<button class="btn btn-secondary" id="filter-button" name="end" >登録して終了</button>
 					<br>
 					<button class="btn btn-secondary" id="filter-button" name="end" style="background-color:#0d6efd;">変更</button>
 				</div>

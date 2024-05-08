@@ -228,7 +228,6 @@ public class StudentDao extends Dao{
 		}
 	}
 	public Boolean del(String no) throws Exception{
-		Student student = new Student();
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		boolean chk;
