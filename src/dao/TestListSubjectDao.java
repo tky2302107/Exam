@@ -14,6 +14,7 @@ import javax.security.auth.Subject;
 import bean.School;
 import bean.TestListSubject;
 
+
 public class TestListSubjectDao extends Dao{
 	private String baseSql = ""
 			+ "select st.ent_year, t.class_num, t.student_no, st.name, t.no, t.point "
