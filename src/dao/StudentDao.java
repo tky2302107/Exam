@@ -227,4 +227,35 @@ public class StudentDao extends Dao{
 			return false;
 		}
 	}
+	public Boolean del(String no) throws Exception{
+		Student student = new Student();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		boolean chk;
+		try{
+			statement = connection.prepareStatement("delete from student where no = ?");
+			statement.setString(1, no);
+			statement.executeUpdate();			
+			chk = true;
+		}catch(Exception e){
+			chk = false;
+			throw e;
+		}finally{
+			if (statement != null){
+				try{
+					statement.close();
+				}catch(Exception sqle){
+					throw sqle;
+				}
+			}
+			if (connection != null){
+				try{
+					connection.close();
+				}catch(Exception sqle){
+					throw sqle;
+				}
+			}
+		}
+		return chk;
+	}
 }
