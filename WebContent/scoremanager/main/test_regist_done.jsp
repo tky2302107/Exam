@@ -11,8 +11,8 @@
                 <h2 class="h3 mb-3 fw-normal bg-success bg-opacity-50 py-2 px-5" style="text-align: center;">登録が完了しました。</h2>
             </div>
             <div class="text-center mb-4">
-                <a href="test_list.jsp" class="btn btn-primary">戻る</a>
-                <a href="test_list_student.jsp" class="btn btn-secondary">成績参照</a>
+                <a href="test_regist.jsp" class="btn btn-primary">戻る</a>
+                <a href="test_list.jsp" class="btn btn-secondary">成績参照</a>
             </div>
         </section>
     </c:param>
