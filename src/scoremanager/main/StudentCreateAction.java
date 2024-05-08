@@ -13,36 +13,49 @@ import javax.servlet.http.HttpSession;
 import bean.Student;
 import bean.Teacher;
 import dao.ClassNumDao;
-import dao.StudentDao;
 import tool.Action;
 
 public class StudentCreateAction extends Action {
 	@Override
+<<<<<<< HEAD
 	public void execute(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {//　ユーザーデータを取得＆セレクトボックス用のクラスデータを取得
+=======
+	public void execute(HttpServletRequest req, HttpServletResponse res)
+			throws Exception {// ユーザーデータを取得＆セレクトボックス用のクラスデータを取得
+>>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 			HttpSession session = req.getSession();
 			Teacher teacher = (Teacher)session.getAttribute("user");
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 			req.setAttribute("entYear", 0);
 			req.setAttribute("classNum", null);
 			req.setAttribute("no", "学生番号を入力してください");
 			req.setAttribute("name", "氏名を入力してください");
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 			String entYearStr="";
 			String classNum="";
 			String no="";
 			String name="";
 			Integer entYear = 0;
 			List<Student> students = null;
-//			Boolean check ;
 			LocalDate todaysDate = LocalDate.now();
 			int year = todaysDate.getYear();
-			StudentDao sDao = new StudentDao();
 			ClassNumDao cNumDao = new ClassNumDao();
-			Student student = new Student();
 			Map<String,String> errors =new HashMap<>();
+<<<<<<< HEAD
 			int chk = 0;
 
+=======
+
+>>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 			entYearStr = req.getParameter("ent_year");
 			classNum = req.getParameter("class_num");
 			no = req.getParameter("no");
@@ -53,6 +66,7 @@ public class StudentCreateAction extends Action {
 			}else{
 				entYear = 0;
 			}
+<<<<<<< HEAD
 			student = sDao.get(no);
 //			student_two = sDao.get(no);
 
@@ -91,27 +105,38 @@ public class StudentCreateAction extends Action {
 						errors.put("duplication", "学生番号が重複しています");
 						System.out.println("e01");
 						req.setAttribute("errors5", errors);
+=======
+
+			int chk = 0;
+			List<String> list = cNumDao.filter(teacher.getSchool());// クラスの一覧
+				if (entYear == 0 ){
+					if (chk > 0){
+						errors.put("entYear", "入学年度を選択してください");
+						req.setAttribute("errors1", errors);
+>>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 					}else{
-						student.setNo(no);
-						student.setName(name);
-						student.setentYear(entYear);
-						student.setClassNum(classNum);
-						student.setAttend(true);
-						student.setSchool(teacher.getSchool());
-						sDao.save(student);
-						req.getRequestDispatcher("student_create_done.jsp").forward(req, res);
+						chk += 1;
 					}
-				}catch (NullPointerException e){
-					student.setNo(no);
-					student.setName(name);
-					student.setentYear(entYear);
-					student.setClassNum(classNum);
-					student.setAttend(true);
-					student.setSchool(teacher.getSchool());
-					sDao.save(student);
-					req.getRequestDispatcher("student_create_done.jsp").forward(req, res);
+				}else if (no.equals(null)|| no.equals("")){
+					errors.put("no", "このフィールドを入力してください");
+					req.setAttribute("errors2", errors);
+				}else if (name.equals(null) || name.equals("")){
+					errors.put("name", "このフィールドを入力してください");
+					req.setAttribute("errors3", errors);
+				}else if (classNum == "" || classNum.equals(null) || classNum.equals("0")){
+					errors.put("classNum", "このフィールドを入力してください");
+					req.setAttribute("errors4", errors);
+				}else{
+					Map<String,String> data = new HashMap<>();
+					data.put("no", no);
+					data.put("name", name);
+					data.put("classNum", classNum);
+					data.put("entYear", String.valueOf(entYear));
+
+					req.getRequestDispatcher("StudentCreateExecute.action").forward(req, res);
+
+					return;
 				}
-			}
 			// 年設定プルダウン
 			if (entYearStr != null){
 				entYear = Integer.parseInt(entYearStr);

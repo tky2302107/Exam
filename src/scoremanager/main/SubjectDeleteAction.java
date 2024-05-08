@@ -11,9 +11,9 @@ public class SubjectDeleteAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession();
 
-		String id = req.getParameter("delete");
-
 		SubjectDao sDao = new SubjectDao();
+
+		Subject id = req.getParameter("delete");
 
 		sDao.delete(id);
 		req.getRequestDispatcher("subject_delete_done.jsp").forward(req, res);

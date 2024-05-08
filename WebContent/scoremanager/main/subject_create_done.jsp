@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%-- ログアウトJSP --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -19,3 +20,16 @@
 		</section>
 	</c:param>
 </c:import>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:import url="/common/base.jsp">
+    <c:param name="title">得点管理システム - 科目情報登録完了</c:param>
+</c:import>
+
+<section>
+    <h2>科目情報登録完了</h2>
+    <p>登録が完了しました。</p>
+    <a href="subject_list.jsp">戻る</a>
+</section>
+>>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git

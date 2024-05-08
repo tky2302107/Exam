@@ -12,7 +12,7 @@ public class SubjectUpdateAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		HttpSession session = req.getSession();
 
-		String name = req.getParameter("name");
+		Subject name = req.getParameter("name");
 		SubjectDao sDao = new SubjectDao();
 
 		sDao.save(name);
