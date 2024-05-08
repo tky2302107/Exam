@@ -12,7 +12,7 @@ import bean.Student;
 
 public class StudentDao extends Dao{
 	private String baseSql = "select * from student where school_cd = ? ";
-	
+		
 	public Student get(String no) throws Exception{
 		Student student = new Student();
 		Connection connection = getConnection();
@@ -197,7 +197,7 @@ public class StudentDao extends Dao{
 				statement.setString(6,student.getSchool().getCd());
 			}else{
 				statement = connection.prepareStatement("update student set name=?, ent_year=?, class_num=?, is_Attend=? where no=?");
-				statement.setString(1,student.getNo());
+				statement.setString(1,student.getName());
 				statement.setInt(2,student.getEntYear());
 				statement.setString(3,student.getClassNum());
 				statement.setBoolean(4,student.isAttend());
