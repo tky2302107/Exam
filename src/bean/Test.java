@@ -10,9 +10,7 @@ public class Test implements Serializable{
 	private int no;
 	private int point;
 
-	public Test(String studentId, String subject2, int score) {
-		// TODO 自動生成されたコンストラクター・スタブ
-	}
+
 	public Student getStudent() {
 		return student;
 	}
