@@ -37,7 +37,6 @@ public class StudentUpdateAction extends Action{
 		List<Student> students = null;
 		StudentDao cls = new StudentDao();
 		
-		
 		students = cls.filter(teacher.getSchool(),ent_year, gclassnum, true);
 		req.setAttribute("gno", String.valueOf(gno));
 		req.setAttribute("name", gname);
@@ -47,7 +46,6 @@ public class StudentUpdateAction extends Action{
 		req.setAttribute("schoolYear", schoolYear);
 		req.setAttribute("students", students);
 		req.setAttribute("no", String.valueOf(gno));
-		req.setAttribute("ent_year", String.valueOf(ent_year));
 		req.getRequestDispatcher("student_update.jsp").forward(req, res);
 	}
 }

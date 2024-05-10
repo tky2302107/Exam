@@ -47,7 +47,7 @@
 				<br>
 				<div>
 					<br>
-					<button class="btn btn-secondary" id="filter-button" name="end" style="background-color:#0d6efd;">変更</button>
+					<button class="btn btn-secondary" id="filter-button" name="end">登録して終了</button>
 				</div>
 				<br>
 				<div><a href="./menu.jsp">戻る</a></div>
