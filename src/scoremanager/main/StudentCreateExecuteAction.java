@@ -42,7 +42,7 @@ public class StudentCreateExecuteAction extends Action{
 		}else if(sDao.get(no)==null){
 			student.setNo(no);
 			student.setName(name);
-			student.setentYear(entYear);
+			student.setEntYear(entYear);
 			student.setClassNum(classNum);
 			student.setAttend(true);
 			student.setSchool(teacher.getSchool());

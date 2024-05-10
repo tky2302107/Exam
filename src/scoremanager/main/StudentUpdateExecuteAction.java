@@ -28,7 +28,7 @@ public class StudentUpdateExecuteAction extends Action{
 		
 		student.setNo(no);
 		student.setName(name);
-		student.setentYear(Integer.parseInt(entYearStr));
+		student.setEntYear(Integer.parseInt(entYearStr));
 		student.setClassNum(classNum);
 		student.setAttend(isAttend1);
 		sDao.save(student);
