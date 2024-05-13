@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.security.auth.Subject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.School;
 import bean.Student;
+import bean.Subject;
 import bean.Teacher;
 import bean.TestListStudent;
 import bean.TestListSubject;
@@ -70,7 +70,7 @@ public class TestListAction extends Action{
 			List<TestListSubject> list = new ArrayList<>();
 			TestListSubjectDao tDao = new TestListSubjectDao();
 			Subject subject = new Subject();
-			subject = subjectDao.get(subjectCd, teacher.getSchool());
+			subject = SubjectDao.get(subjectCd, teacher.getSchool());
 			School school = teacher.getSchool();
 			list = tDao.filter(entYear, classNum, subject, school );
 			req.setAttribute("subject_name", subject.getName());
