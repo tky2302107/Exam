@@ -19,6 +19,7 @@ import dao.SubjectDao;
 import dao.TestListStudentDao;
 import dao.TestListSubjectDao;
 import tool.Action;
+import tool.Util;
 
 public class TestListAction extends Action{
 
@@ -70,7 +71,7 @@ public class TestListAction extends Action{
 			List<TestListSubject> list = new ArrayList<>();
 			TestListSubjectDao tDao = new TestListSubjectDao();
 			Subject subject = new Subject();
-			subject = SubjectDao.get(subjectCd, teacher.getSchool());
+			subject = subjectDao.get(subjectCd, teacher.getSchool());
 			School school = teacher.getSchool();
 			list = tDao.filter(entYear, classNum, subject, school );
 			req.setAttribute("subject_name", subject.getName());
