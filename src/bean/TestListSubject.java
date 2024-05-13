@@ -41,11 +41,11 @@ public class TestListSubject implements Serializable{
 	public void setPoints(Map<Integer,Integer> points){
 	    this.points = points;
     }
-    public  Map<Integer,Integer> points(){
-        return points;
+    public int getPoint(int key){
+        return points.get(key);
     }
-    public void putPint(){
-    	return;
+    public void putPoint(int key, int value){
+    	points.put(key, value);
     }
 }
 

@@ -9,9 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.security.auth.Subject;
-
 import bean.School;
+import bean.Subject;
 import bean.TestListSubject;
 
 
@@ -35,7 +34,7 @@ public class TestListSubjectDao extends Dao{
 				tSubject.setStudentName(rSet.getString("name"));
 				tSubject.setClassNum(rSet.getString("class_num"));
 				tSubject.setPoints(point);
-				tSubject.putPoit(rSet.getInt("no"), rSet.getInt("point"));
+				tSubject.putPoint(rSet.getInt("no"), rSet.getInt("point"));
 				list.add(tSubject);
 			}
 		}catch (Exception e) {

@@ -13,15 +13,17 @@
 			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 				<div>
 					<label class="form-label" for="student-f2-select">入学年度</label>
-					<Input readonly value="${ent_year}"name="ent_year" class="form-control"></Input>
-					
+					<br>
+					<p>　<Input readonly value="${ent_year}"name="ent_year" class="border border-0" style="left:10px;"></Input></p>
+					<p></p>
 					<%-- <%=request.setParameter("",request.getAttribute("ent_year")) %> --%>
 					
 				</div>
 				<div>
 					<label class="form-label" for="student-f2-select">学生番号</label>
-					<Input readonly value="${no}" name="no" class="form-control"></Input>
-					
+					<br>
+					<p>　<Input readonly value="${no}" name="no" class="border border-0"></Input></p>
+					<p></p>
 				</div>
 				<div>
 					<label class="form-label" for="student-f2-select">氏名</label>
@@ -47,7 +49,7 @@
 				
 				<div>
 					<br>
-					<input type="submit" value="変更" class="btn btn-secondary">
+					<input type="submit" value="変更" class="btn btn-secondary" style="background-color:#0d6efd;">
 				</div>
 				<br>
 				<div><a href="./menu.jsp">戻る</a></div>

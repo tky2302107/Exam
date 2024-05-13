@@ -12,7 +12,7 @@ import bean.Student;
 
 public class StudentDao extends Dao{
 	private String baseSql = "select * from student where school_cd = ? ";
-		
+
 	public Student get(String no) throws Exception{
 		Student student = new Student();
 		Connection connection = getConnection();
@@ -25,7 +25,7 @@ public class StudentDao extends Dao{
 			if (rSet.next()){
 				student.setNo(rSet.getString("no"));
 				student.setName(rSet.getString("name"));
-				student.setentYear(rSet.getInt("ent_year"));
+				student.setEntYear(rSet.getInt("ent_year"));
 				student.setClassNum(rSet.getString("class_num"));
 				student.setAttend(rSet.getBoolean("is_attend"));
 				student.setSchool(schoolDao.get(rSet.getString("school_cd")));
@@ -59,7 +59,7 @@ public class StudentDao extends Dao{
 				Student student = new Student();
 				student.setNo(rSet.getString("no"));
 				student.setName(rSet.getString("name"));
-				student.setentYear(rSet.getInt("ent_year"));
+				student.setEntYear(rSet.getInt("ent_year"));
 				student.setClassNum(rSet.getString("class_num"));
 				student.setAttend(rSet.getBoolean("is_attend"));
 				student.setSchool(school);
@@ -89,7 +89,7 @@ public class StudentDao extends Dao{
 			rSet = statement.executeQuery();
 			list = postFilter(rSet,school);
 		}catch(Exception e){
-			throw e;	
+			throw e;
 		}finally{
 			if (statement != null){
 				try{
@@ -106,7 +106,7 @@ public class StudentDao extends Dao{
 			}
 		}
 		return list;
-		
+
 	}
 	public List<Student> filter(School school, int entYear, boolean isAttend)throws Exception{
 		List<Student> list = new ArrayList<>();
@@ -126,7 +126,7 @@ public class StudentDao extends Dao{
 			rSet = statement.executeQuery();
 			list = postFilter(rSet,school);
 		}catch(Exception e){
-			throw e;	
+			throw e;
 		}finally{
 			if (statement != null){
 				try{
@@ -155,14 +155,14 @@ public class StudentDao extends Dao{
 			conditionIsAttend = " and is_attend = true";
 		}
 		try{
-			
+
 			statement = connection.prepareStatement(baseSql + conditionIsAttend + order);
 			statement.setString(1, school.getCd());
 			rSet = statement.executeQuery();
-			
+
 			list = postFilter(rSet,school);
 		}catch(Exception e){
-			throw e;	
+			throw e;
 		}finally{
 			if (statement != null){
 				try{
@@ -234,7 +234,7 @@ public class StudentDao extends Dao{
 		try{
 			statement = connection.prepareStatement("delete from student where no = ?");
 			statement.setString(1, no);
-			statement.executeUpdate();			
+			statement.executeUpdate();
 			chk = true;
 		}catch(Exception e){
 			chk = false;
