@@ -12,11 +12,7 @@ import bean.Student;
 
 public class StudentDao extends Dao{
 	private String baseSql = "select * from student where school_cd = ? ";
-<<<<<<< HEAD
-
-=======
 		
->>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 	public Student get(String no) throws Exception{
 		Student student = new Student();
 		Connection connection = getConnection();
@@ -93,7 +89,7 @@ public class StudentDao extends Dao{
 			rSet = statement.executeQuery();
 			list = postFilter(rSet,school);
 		}catch(Exception e){
-			throw e;
+			throw e;	
 		}finally{
 			if (statement != null){
 				try{
@@ -110,7 +106,7 @@ public class StudentDao extends Dao{
 			}
 		}
 		return list;
-
+		
 	}
 	public List<Student> filter(School school, int entYear, boolean isAttend)throws Exception{
 		List<Student> list = new ArrayList<>();
@@ -130,7 +126,7 @@ public class StudentDao extends Dao{
 			rSet = statement.executeQuery();
 			list = postFilter(rSet,school);
 		}catch(Exception e){
-			throw e;
+			throw e;	
 		}finally{
 			if (statement != null){
 				try{
@@ -159,14 +155,14 @@ public class StudentDao extends Dao{
 			conditionIsAttend = " and is_attend = true";
 		}
 		try{
-
+			
 			statement = connection.prepareStatement(baseSql + conditionIsAttend + order);
 			statement.setString(1, school.getCd());
 			rSet = statement.executeQuery();
-
+			
 			list = postFilter(rSet,school);
 		}catch(Exception e){
-			throw e;
+			throw e;	
 		}finally{
 			if (statement != null){
 				try{
@@ -200,13 +196,8 @@ public class StudentDao extends Dao{
 				statement.setBoolean(5,student.isAttend());
 				statement.setString(6,student.getSchool().getCd());
 			}else{
-<<<<<<< HEAD
-				statement = connection.prepareStatement("update student set name=?, ent_year=?, class_num=?, is_Attend=? where cd=?");
-				statement.setString(1,student.getNo());
-=======
 				statement = connection.prepareStatement("update student set name=?, ent_year=?, class_num=?, is_Attend=? where no=?");
 				statement.setString(1,student.getName());
->>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 				statement.setInt(2,student.getEntYear());
 				statement.setString(3,student.getClassNum());
 				statement.setBoolean(4,student.isAttend());
@@ -235,5 +226,35 @@ public class StudentDao extends Dao{
 		}else{
 			return false;
 		}
+	}
+	public Boolean del(String no) throws Exception{
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		boolean chk;
+		try{
+			statement = connection.prepareStatement("delete from student where no = ?");
+			statement.setString(1, no);
+			statement.executeUpdate();			
+			chk = true;
+		}catch(Exception e){
+			chk = false;
+			throw e;
+		}finally{
+			if (statement != null){
+				try{
+					statement.close();
+				}catch(Exception sqle){
+					throw sqle;
+				}
+			}
+			if (connection != null){
+				try{
+					connection.close();
+				}catch(Exception sqle){
+					throw sqle;
+				}
+			}
+		}
+		return chk;
 	}
 }

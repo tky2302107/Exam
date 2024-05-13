@@ -43,7 +43,7 @@
 					<button class="btn btn-secondary" id="filter-button">絞込み</button>
 				</div>
 				<div class="mt-2 text-warning">${errors.get("f1")}</div>
-				
+
 			</div>
 		</form>
 		<c:choose>
@@ -84,7 +84,7 @@
 			</c:when>
 			<c:otherwise>
 				<div>学生情報が存在しませんでした</div>
-			</c:otherwise>	
+			</c:otherwise>
 			</c:choose>
 		</section>
 	</c:param>

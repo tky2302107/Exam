@@ -8,7 +8,7 @@
     <c:param name="content">
         <section class="me-4">
             <h2 class="h3 mb-3 fw-normal bg-secondary bg-opacity-10 py-2 px-4">成績参照</h2>
-            <form method="get" action="TestListServlet">
+            <form method="get" action="TestListSubjectExecute.action">
                 <div class="border mx-3 mb-3 rounded p-3">
                     <div class="row align-items-center">
                         <div class="col-2">
@@ -64,6 +64,7 @@
             </c:if>
             <div class="text-start text-muted mb-3 mx-3">
                 <p style="color: aqua;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
+            </div>
         </section>
     </c:param>
 </c:import>

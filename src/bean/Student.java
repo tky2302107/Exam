@@ -47,16 +47,8 @@ public class Student implements Serializable{
 	public void setSchool(School school) {
 		this.school = school;
 	}
-<<<<<<< HEAD
-//	public i nt getSchoolYear() {
-////		int nendo = 1;
-//		final int nendo = LocalDate.now().minusMonths(3).getYear();
-//		return nendo;
-//	}
-=======
 	public int getSchoolYear() {
 		final int nendo = LocalDate.now().minusMonths(3).getYear();
 		return nendo;
 	}
->>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 }
