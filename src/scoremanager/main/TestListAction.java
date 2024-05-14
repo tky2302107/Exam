@@ -80,7 +80,7 @@ public class TestListAction extends Action{
 			req.setAttribute("subjectError", "入学年度とクラスと科目を選択してください");
 			return;
 		}
-		req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+		req.getRequestDispatcher("test_list_subject.jsp").forward(req, res);
 		return;
 	}
 
