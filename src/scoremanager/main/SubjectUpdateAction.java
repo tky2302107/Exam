@@ -3,11 +3,8 @@ package scoremanager.main;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
 import bean.Subject;
 import bean.Teacher;
-=======
->>>>>>> branch 'master' of https://github.com/tky2302107/Exam.git
 import dao.SubjectDao;
 import tool.Action;
 import tool.Util;
