@@ -16,7 +16,7 @@
 					<label class="form-label" for="student-f1-select">入学年度</label>
 					<select class="form-select" id = "student-f1-select" name="f1">
 						<option value="0">--------</option>
-						<c:forEach var="year" items="${year}">
+						<c:forEach var="year" items="${ent_year_set}">
 							<%-- 現在のyearと選択されていたf1が一致していた場合にselectedを追記 --%>
 							<option value="${year}" <c:if test="${year==f1}">selected</c:if>>${year}</option>
 						</c:forEach>
@@ -26,7 +26,7 @@
 					<label class="form-label"  for="student-f2-select">クラス</label>
 					<select class="form-select"  id="student-f3-select"  name="f2">
 						<option value="0">--------<option>
-						<c:forEach var="num" items="${num}">
+						<c:forEach var="num" items="${class_num_set}">
 							<%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
 							<option value="${num}"<c:if test="${num==f2}">selected</c:if>>${num}</option>
 						</c:forEach>
@@ -36,16 +36,18 @@
 					<label class="form-label"  for="student-f2-select">科目</label>
 					<select class="form-select"  id="student-f3-select"  name="f2">
 						<option value="0">--------<option>
-						<c:forEach var="num" items="${subject.cd}">
+						<c:forEach var="num" items="${subjects}">
 							<%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
-							<%@page import="bean.Student, java.util.List" %>
-							<% List<Student> list=(List<Student>)request.getAttribute("subject.cd");%>
-								<%for (Student s : list){ %>
+							<%@page import="bean.Subject, java.util.List" %>
+							<% List<Subject> list=(List<Subject>)request.getAttribute("subjects");%>
+								<%for (Subject s : list){ %>
 											<option value="<%=s.getName()%>"><%=s.getName()%></option>
 								<%}%>
 							<option value="${subject.cd}"<c:if test="${subject_name==f3}">selected</c:if>>${subject_name}</option>
 						</c:forEach>
 					</select>
+					<% System.out.println(request.getParameter("subjects")); %>
+					
 				</div>
 				<div class="col-4" style="width:20%;">
 					<button class="btn btn-secondary" id="filter-button" onclick="TestListSubjectExecute.action">検索</button>
