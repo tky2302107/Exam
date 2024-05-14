@@ -67,7 +67,7 @@ public class SubjectDao extends Dao{
 
 		try {
 			statement = connection.prepareStatement(
-			"select * from subject where school_cd=? and is_true = true");
+			"select * from subject where school_cd=?");
 			statement.setString(1, school.getCd());
 			rSet = statement.executeQuery();
 			while(rSet.next()){
