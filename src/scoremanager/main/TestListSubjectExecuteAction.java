@@ -1,4 +1,4 @@
-package scoremanager;
+package scoremanager.main;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,8 +15,8 @@ import bean.Subject;
 import bean.Test;
 
 public class TestListSubjectExecuteAction {
-	public void execute(HttpServletRequest req, HttpServletResponse res) 
-			throws Exception {// ユーザーデータを取得＆セレクトボックス用のクラスデータを取得	
+	public void execute(HttpServletRequest req, HttpServletResponse res)
+			throws Exception {// ユーザーデータを取得＆セレクトボックス用のクラスデータを取得
 
     	Subject subject = new Subject();
         List<Test> testList = new ArrayList<>();
