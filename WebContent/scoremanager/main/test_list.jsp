@@ -9,7 +9,7 @@
 	<c:param name = "content">
 		<section class="me-4">
 		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照</h2>
-		<form method="get">
+		<form method="get" action="TestListSubjectExecute.action">
 			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 				<div class="col-4" style="width:15%;">科目情報</div>
 				<div class="col-4" style="width:15%;">
@@ -36,32 +36,34 @@
 					<label class="form-label"  for="student-f2-select">科目</label>
 					<select class="form-select"  id="student-f3-select"  name="f2">
 						<option value="0">--------<option>
-						<c:forEach var="num" items="${subjects}">
-							<%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
-							<%@page import="bean.Subject, java.util.List" %>
-							<% List<Subject> list=(List<Subject>)request.getAttribute("subjects");%>
-								<%for (Subject s : list){ %>
-											<option value="<%=s.getName()%>"><%=s.getName()%></option>
-								<%}%>
-							<option value="${subject.cd}"<c:if test="${subject_name==f3}">selected</c:if>>${subject_name}</option>
-						</c:forEach>
+						<%-- <c:forEach var="num" items="${subjects}"> --%>
+							<%-- <%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
+						<%@page import="bean.Subject, java.util.List" %>
+						<% List<Subject> list=(List<Subject>)request.getAttribute("subjects");%>
+							<%for (Subject s : list){ %>
+								<option value="<%=s.getName()%>"><%=s.getName()%></option>
+						<%}%>
+							<%-- <option value="${subject.cd}"<c:if test="${subject_name==f3}">selected</c:if>>${subject_name}</option> --%>
+						<%-- </c:forEach> --%>
 					</select>
-					<% System.out.println(request.getParameter("subjects")); %>
 					
 				</div>
 				<div class="col-4" style="width:20%;">
-					<button class="btn btn-secondary" id="filter-button" onclick="TestListSubjectExecute.action">検索</button>
+					<button class="btn btn-secondary" id="filter-button">検索</button>
 				</div>
 			
 			<div class="mt-2 text-warning">${errors.get("e1")}</div>
-		<HR>
+			</div>
+			</form>
+			<form method="get" action="TestListStudentExecute.action">
+			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 				<div class="col-4" style="width:15%;">学生情報</div>
 				<div class="col-4" style="width:30%;">
 					<label class="form-label" for="student-f1-select">学生情報</label>
-					<Input value="${no}" name="no" class="form-control" placeholder="学生番号を入力してください"></Input>
+					<Input value="${f4}" name="f4" class="form-control" placeholder="学生番号を入力してください"required></Input>
 				</div>
 				<div class="col-4" style="width:20%;">
-					<button class="btn btn-secondary" id="filter-button" onclick="TestListStudentExecute.action">検索</button>
+					<button class="btn btn-secondary" id="filter-button">検索</button>
 				</div>
 				
 			</div>
