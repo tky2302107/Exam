@@ -34,7 +34,7 @@
 				</div>
 				<div class="col-4" style="width:30%;">
 					<label class="form-label"  for="student-f2-select">科目</label>
-					<select class="form-select"  id="student-f3-select"  name="f2">
+					<select class="form-select"  id="student-f3-select"  name="f3">
 						<option value="0">--------<option>
 						<%-- <c:forEach var="num" items="${subjects}"> --%>
 							<%-- <%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
@@ -51,6 +51,9 @@
 				<div class="col-4" style="width:20%;">
 					<button class="btn btn-secondary" id="filter-button" onClick="TestListSubjectExecute.action">検索</button>
 				</div>
+				<div>
+					<Input value="${sj}" name="f" hidden></Input>
+				</div>
 			
 			<div class="mt-2 text-warning">${errors.get("e1")}</div>
 			</div>
@@ -64,6 +67,9 @@
 				</div>
 				<div class="col-4" style="width:20%;">
 					<button class="btn btn-secondary" id="filter-button" onClick="TestListStudentExecute.action">検索</button>
+				</div>
+				<div>
+					<Input value="${st}" name="f" hidden></Input>
 				</div>
 				
 			</div>
