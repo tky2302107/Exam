@@ -2,24 +2,30 @@ package scoremanager.main;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import bean.Subject;
+import bean.Teacher;
 import dao.SubjectDao;
 import tool.Action;
+import tool.Util;
 
 public class SubjectUpdateAction extends Action{
-	@Override
-	public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		HttpSession session = req.getSession();
 
-		Subject name = req.getParameter("name");
+	public void execute(HttpServletRequest req,HttpServletResponse res)throws Exception {
+
+		String cd = "";
+		cd = req.getParameter("cd");
+		Subject subject = new Subject();
 		SubjectDao sDao = new SubjectDao();
+		Util util = new Util();
+		Teacher teacher = util.getUser(req);
 
-		sDao.save(name);
-		req.getRequestDispatcher("subject_update_done.jsp").forward(req, res);
+		subject = sDao.get(cd, teacher.getSchool());
 
+		req.setAttribute("subject", subject);
 
 		req.getRequestDispatcher("subject_update.jsp").forward(req, res);
+
 	}
+
 }
