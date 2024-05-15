@@ -28,9 +28,10 @@
 					<label class="form-label"  for="student-f2-select">クラス</label>
 					<select class="form-select"  id="student-f3-select"  name="f2">
 						<option value="0">--------<option>
+						<%-- <% System.out.println(request.getParameter("class_num_set"));%> --%>
 						<c:forEach var="num" items="${class_num_set}">
 							<%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
-							<option value="${num}"<c:if test="${num==f2}">selected</c:if>>${num}</option>
+							<option value="${num}"<c:if test="${num == f2}">selected</c:if>>${num}</option>
 						</c:forEach>
 					</select>
 				</div>
