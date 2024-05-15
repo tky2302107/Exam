@@ -110,11 +110,10 @@ public class SubjectDao extends Dao{
 		try {
 
 			statement = connection.prepareStatement(
-					"merge into subject key(school_cd,cd) values(?,?,?,?) ");
+					"merge into subject key(school_cd,cd) values(?,?,?) ");
 			statement.setString(1, subject.getSchool().getCd());
 			statement.setString(2, subject.getCd());
 			statement.setString(3, subject.getName());
-			statement.setBoolean(4, true);
 			// プリペアードステートメントを実行
 			count = statement.executeUpdate();
 		}catch (Exception e){
