@@ -14,7 +14,7 @@
 				<div>
 					<label class="form-label" for="student-f2-select">入学年度</label>
 					<br>
-					<p>　<Input readonly value="${ent_year}"name="ent_year" class="border border-0" style="left:10px;"></Input></p>
+					<p>　<Input readonly value="${ent_year}"name="ent_year" class="border border-0" style="left:10px;"hidden/>${ent_year}</p>
 					<p></p>
 					<%-- <%=request.setParameter("",request.getAttribute("ent_year")) %> --%>
 					
@@ -22,7 +22,7 @@
 				<div>
 					<label class="form-label" for="student-f2-select">学生番号</label>
 					<br>
-					<p>　<Input readonly value="${no}" name="no" class="border border-0"></Input></p>
+					<p>　<Input readonly value="${no}" name="no" class="border border-0"hidden/>${no}</p>
 					<p></p>
 				</div>
 				<div>

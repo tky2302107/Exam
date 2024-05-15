@@ -55,7 +55,7 @@
 					<Input value="${sj}" name="f" hidden></Input>
 				</div>
 			
-			<div class="mt-2 text-warning">${errors.get("e1")}</div>
+			<div class="mt-2 text-warning">${errors.get("subjectError")}</div>
 			</div>
 			</form>
 			<form method="get" action="TestListStudentExecute.action">
@@ -74,11 +74,12 @@
 				
 			</div>
 		</form>
-		<p style="color:#18cbff;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p>
+		<!-- <p style="color:#18cbff;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p> -->
 		
 		<c:choose>
-		<c:when test="${subject.size()>0 }">
-					<div>科目：</div>
+			<c:when test="${subject.size()>0 }">
+				<c:when test='${student.f="sj"}'>
+					<div>科目：{subject_name}</div>
 					<div>検索結果：${subject.size() }件</div>
 					<table class="table table-hover">
 						<tr>
@@ -106,10 +107,35 @@
 					</table>
 				</c:when>
 				<c:otherwise>
-					<div>学生情報が存在しませんでした</div>
+					<div>氏名：${student_name}(${student_no})</div>
+					<div>検索結果：${student.size() }件</div>
+					<table class="table table-hover">
+						<tr>
+							<th>科目名</th>
+							<th>科目コード</th>
+							<th>回数</th>
+							<th>点数</th>
+							<th></th>
+							<th></th>
+						</tr>
+					<c:forEach var="student" items="${students}">
+						<tr>
+							<td>${student.entYear}</td>
+							<td>${student.classNum}</td>
+							<td>${student.no}</td>
+							<td>${student.Name}</td>
+							<td><input name="point_${学生番号}">${point}</input></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</c:forEach>
+					</table>
 				</c:otherwise>
-			</c:choose>
-		</section>
-		
+			</c:when>
+			<c:otherwise>
+				<div>学生情報が存在しませんでした</div>
+			</c:otherwise>
+		</c:choose>
+		</section>		
 	</c:param>
 </c:import>
