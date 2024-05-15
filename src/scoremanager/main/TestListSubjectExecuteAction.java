@@ -1,3 +1,4 @@
+/*
 package scoremanager.main;
 
 import java.sql.Connection;
@@ -47,5 +48,5 @@ public class TestListSubjectExecuteAction {
         req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
     }
 }
-
+*/
 
