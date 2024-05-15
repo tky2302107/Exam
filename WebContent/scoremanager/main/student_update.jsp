@@ -12,7 +12,7 @@
 		<form action="StudentUpdateExecute.action">
 			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 				<div>
-					<label class="form-label" for="student-f2-select">入学年度</label>
+					<label class="form-label" for="student-f1-select">入学年度</label>
 					<br>
 					<p>　<Input readonly value="${ent_year}"name="ent_year" class="border border-0" style="left:10px;"hidden/>${ent_year}</p>
 					<p></p>
@@ -20,19 +20,22 @@
 					
 				</div>
 				<div>
+				<%-- <% System.out.println(request.getParameter("class_num_set")); %>
+				<% System.out.println(request.getParameter("class_num")); %>
+				<% System.out.println(request.getParameter("num")); %> --%>
 					<label class="form-label" for="student-f2-select">学生番号</label>
 					<br>
 					<p>　<Input readonly value="${no}" name="no" class="border border-0"hidden/>${no}</p>
 					<p></p>
 				</div>
 				<div>
-					<label class="form-label" for="student-f2-select">氏名</label>
+					<label class="form-label" for="student-f3-select">氏名</label>
 					<Input class="form-control" name="name"value="${name}"maxlength="30"required placeholder="氏名を入力してください"></Input>
 					
 					<%-- <div class="mt-2 text-warning">${errors3.get("name")}</div> --%>
 				</div>
 				<div>
-					<label class="form-label" for="student-f3-select">クラス</label>
+					<label class="form-label" for="student-f4-select">クラス</label>
 					<select class="form-select" id= "student-class_num-select" name="class_num"required>
 						<option value="0">--------<option>
 						<c:forEach var="num" items="${class_num_set}">

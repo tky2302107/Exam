@@ -26,7 +26,7 @@
 				<div class="col-4" style="width:15%;">
 					<label class="form-label"  for="student-f2-select">クラス</label>
 					<select class="form-select"  id="student-f2-select"  name="f2">
-						<option value="0">--------<option>
+						<option value="0">--------</option>
 						<c:forEach var="num" items="${class_num_set}">
 							<%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
 							<option value="${num}"<c:if test="${num==f2}">selected</c:if>>${num}</option>
@@ -36,7 +36,7 @@
 				<div class="col-4" style="width:30%;">
 					<label class="form-label"  for="student-f3-select">科目</label>
 					<select class="form-select"  id="student-f3-select"  name="f3">
-						<option value="0">--------<option>
+						<option value="0">--------</option>
 						<%-- <c:forEach var="num" items="${subjects}"> --%>
 							<%-- <%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
 						<%@page import="bean.Subject, java.util.List" %>
