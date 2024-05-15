@@ -20,7 +20,7 @@ public class SubjectUpdateExecuteAction extends Action{
 		SubjectDao sDao = new SubjectDao();
 
 		name = req.getParameter("name");
-		cd = req.getParameter("cd");
+		cd = req.getParameter("subject.cd");
 
 		Subject subject = new Subject();
 		subject.setCd(cd);
@@ -30,7 +30,7 @@ public class SubjectUpdateExecuteAction extends Action{
 		subject2 = sDao.get(cd, teacher.getSchool());
 		if(subject2 == null){
 			req.setAttribute("f1","科目が存在していません。");
-			req.setAttribute("cd", cd);
+			req.setAttribute("subject.cd", cd);
 			req.setAttribute("name", name);
 			req.getRequestDispatcher("subject_update.jsp").forward(req, res);
 			return;

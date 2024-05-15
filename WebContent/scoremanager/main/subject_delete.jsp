@@ -13,9 +13,9 @@
 	<c:param name="content">
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">科目情報削除</h2>
-			<p>「」を削除してもよろしいですか</p>
-			<div>
-			<button type="submit" style="background-color: red; color: white; border-radius: 10px; outline: none;">削除</button>
+			<p><Input readonly value="${subject.name}" name="name" class="border border-0"hidden/>${subject.name}を削除してもよろしいですか</p>
+			<div class="mb-3">
+				<input type="submit" class="btn btn-primary" value="削除" style="background-color: red; color: white;">
 			</div>
 			<a href="SubjectList.action">戻る</a>
 		</section>
