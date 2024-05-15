@@ -8,9 +8,19 @@
 	<c:param name = "scriipts">	</c:param>
 	<c:param name = "content">
 		<section class="me-4">
-		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（科目）</h2>
+		<c:choose>
+			<c:when test="${student.f=='sj'}"></c:when>
+				<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（科目）</h2>
+			<c:otherwise>
+				<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（学生）</h2>
+			</c:otherwise>
+		</c:choose>
+		
+		<%-- <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照</h2> --%>
+		<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 		<form method="get" action="TestListSubjectExecute.action">
-			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
+			
+			<div class = "row align-items-center" id="filter">
 				<div class="col-4" style="width:15%;">科目情報</div>
 				<div class="col-4" style="width:15%;">
 					<label class="form-label" for="student-f1-select">入学年度</label>
@@ -24,7 +34,7 @@
 				</div>
 				<div class="col-4" style="width:15%;">
 					<label class="form-label"  for="student-f2-select">クラス</label>
-					<select class="form-select"  id="student-f3-select"  name="f2">
+					<select class="form-select"  id="student-f2-select"  name="f2">
 						<option value="0">--------<option>
 						<c:forEach var="num" items="${class_num_set}">
 							<%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
@@ -33,7 +43,7 @@
 					</select>
 				</div>
 				<div class="col-4" style="width:30%;">
-					<label class="form-label"  for="student-f2-select">科目</label>
+					<label class="form-label"  for="student-f3-select">科目</label>
 					<select class="form-select"  id="student-f3-select"  name="f3">
 						<option value="0">--------<option>
 						<%-- <c:forEach var="num" items="${subjects}"> --%>
@@ -58,8 +68,9 @@
 			<div class="mt-2 text-warning">${errors.get("subjectError")}</div>
 			</div>
 			</form>
+			<HR>
 			<form method="get" action="TestListStudentExecute.action">
-			<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
+			<div class = "row align-items-center" id = "filter">
 				<div class="col-4" style="width:15%;">学生情報</div>
 				<div class="col-4" style="width:30%;">
 					<label class="form-label" for="student-f1-select">学生情報</label>
@@ -74,11 +85,12 @@
 				
 			</div>
 		</form>
+		</div>
 		<!-- <p style="color:#18cbff;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p> -->
 		
 		<c:choose>
 			<c:when test="${subject.size()>0 }">
-				<c:when test='${student.f="sj"}'>
+				<c:when test='${student.f=="sj"}'>
 					<div>科目：{subject_name}</div>
 					<div>検索結果：${subject.size() }件</div>
 					<table class="table table-hover">
