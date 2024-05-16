@@ -34,9 +34,6 @@
 						</c:when>
 					</c:choose>
 				</table>
-				<div class="my-2 text-end px-4">
-					<a href="SubjectDeletedList.action" class="link-danger">※削除済み教科一覧はこちら</a>
-				</div>
 		</section>
 	</c:param>
 </c:import>

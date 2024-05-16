@@ -155,10 +155,9 @@ public class SubjectDao extends Dao{
 		int count = 0;
 		try{
 			statement = connection.prepareStatement(
-				"update subject set is_true = ? where school_cd = ? and cd = ?");
-			statement.setBoolean(1, false);
-			statement.setString(2, subject.getSchool().getCd());
-			statement.setString(3, subject.getCd());
+				"delete subject where school_cd = ? and cd = ?");
+			statement.setString(1, subject.getSchool().getCd());
+			statement.setString(2, subject.getCd());
 			count = statement.executeUpdate();
 		}catch (Exception e) {
 			throw e;
