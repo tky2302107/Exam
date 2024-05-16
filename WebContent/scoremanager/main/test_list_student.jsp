@@ -7,8 +7,6 @@
 	</c:param>
 	<c:param name = "scriipts">	</c:param>
 	<c:param name = "content">
-	
-	<%System.out.println("jsp2"); %>
 		<section class="me-4">
 		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照</h2>
 		<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
@@ -80,12 +78,12 @@
 		</form>
 		</div>
 		<!-- <p style="color:#18cbff;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p> -->
-		<%System.out.println("jsp1"); %>
 		<c:choose>
-			
+				<c:when test='${error==true}'>
+					<div>学生情報が存在しませんでした</div>
+				</c:when>
 				<c:when test='${f=="sj"}'>
 					<div>科目：{subject_name}</div>
-					<div>検索結果：${subject.size() }件</div>
 					<table class="table table-hover">
 						<tr>
 							<th>入学年度</th>
@@ -113,7 +111,6 @@
 				</c:when>
 				<c:otherwise>
 					<div>氏名：${student_name}(${student_no})</div>
-					<div>検索結果：${student.size() }件</div>
 					<table class="table table-hover">
 						<tr>
 							<th>科目名</th>
@@ -123,13 +120,12 @@
 							<th></th>
 							<th></th>
 						</tr>
-					<c:forEach var="student" items="${students}">
+					<c:forEach var="student" items="${result}">
 						<tr>
-							<td>${student.entYear}</td>
-							<td>${student.classNum}</td>
-							<td>${student.subjectname}</td>
-							<td>${student.no}</td>
-							<td><input name="point_${学生番号}">${student.point}</td>
+							<td>${result.subject_name}</td>
+							<td>${result.subject_code}</td>
+							<td>${result.no}</td>
+							<td><input name="point_${学生番号}">${result.point}</td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -137,9 +133,6 @@
 					</table>
 				</c:otherwise>
 			
-			<%-- <c:otherwise>
-				<div>学生情報が存在しませんでした</div>
-			</c:otherwise> --%>
 		</c:choose>
 		</section>		
 	</c:param>
