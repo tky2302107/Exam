@@ -1,52 +1,55 @@
-/*
 package scoremanager.main;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bean.School;
 import bean.Subject;
-import bean.Test;
+import bean.Teacher;
+import bean.TestListSubject;
+import dao.SubjectDao;
+import dao.TestListSubjectDao;
+import tool.Action;
 
-public class TestListSubjectExecuteAction {
+public class TestListSubjectExecuteAction extends Action{
 	public void execute(HttpServletRequest req, HttpServletResponse res)
 			throws Exception {// ユーザーデータを取得＆セレクトボックス用のクラスデータを取得
 
-    	Subject subject = new Subject();
-        List<Test> testList = new ArrayList<>();
-        // データベース接続情報
-        String url = "jdbc:h2:tcp://localhost/~/exam";
-        String username = "sa";
-        String password = "";
-
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
-            String query = "SELECT * FROM test_scores WHERE subject = ?";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, subject.getName());
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    while (resultSet.next()) {
-                        String studentId = resultSet.getString("student_id");
-                        int score = resultSet.getInt("score");
-                        Test test = new Test(studentId, subject.getName(), score);
-                        testList.add(test);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // エラーハンドリングを行う
-        }
-//        return testList;
-        req.setAttribute("subject", subject);
+		HttpSession session = req.getSession();
+		Teacher teacher = (Teacher)session.getAttribute("user");
+//		
+//		School School = new School();
+//        
+        
+//        Subject Subject = new Subject();
+        int entYear = Integer.parseInt(req.getParameter("f1"));
+        String classNum = req.getParameter("f2");
+        String subject = req.getParameter("f3");
+        String f = req.getParameter("f");
+        
+        TestListSubjectDao TLSD = new TestListSubjectDao();
+        SubjectDao SubDao = new SubjectDao();
+		
+        
+        
+		Subject subject0 = SubDao.get(subject, teacher.getSchool());
+        School school = null;
+		List<TestListSubject> Subject1 = TLSD.filter(entYear, classNum, subject0, school);
+        System.out.println(Subject1);
+        
+        
+        req.setAttribute("subject", Subject1);
+        req.setAttribute("f1", entYear);
+        req.setAttribute("f2", classNum);
+        req.setAttribute("f3", subject);
+        req.setAttribute("f", f);
+        List<Subject> subjects = null;
+		subjects = SubDao.filter(teacher.getSchool());
+        req.setAttribute("subjects", subjects);
         req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
     }
 }
-*/
 

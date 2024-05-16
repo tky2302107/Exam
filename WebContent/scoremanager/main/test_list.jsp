@@ -42,7 +42,7 @@
 						<%@page import="bean.Subject, java.util.List" %>
 						<% List<Subject> list=(List<Subject>)request.getAttribute("subjects");%>
 							<%for (Subject s : list){ %>
-								<option value="<%=s.getName()%>"><%=s.getName()%></option>
+								<option value="<%=s.getCd()%>"><%=s.getName()%></option>
 						<%}%>
 							<%-- <option value="${subject.cd}"<c:if test="${subject_name==f3}">selected</c:if>>${subject_name}</option> --%>
 						<%-- </c:forEach> --%>
@@ -53,7 +53,7 @@
 					<button class="btn btn-secondary" id="filter-button">検索</button>
 				</div>
 				<div>
-					<Input value="${sj}" name="f" hidden></Input>
+					<Input value="sj" name="f" hidden></Input>
 				</div>
 			
 			<div class="mt-2 text-warning">${errors.get("e1")}</div>
@@ -72,7 +72,7 @@
 					<button class="btn btn-secondary" id="filter-button">検索</button>
 				</div>
 				<div>
-					<Input value="${st}" name="f" hidden></Input>
+					<Input value="st" name="f" hidden></Input>
 				</div>
 				
 			</div>

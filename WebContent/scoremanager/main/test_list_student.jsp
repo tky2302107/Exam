@@ -7,19 +7,12 @@
 	</c:param>
 	<c:param name = "scriipts">	</c:param>
 	<c:param name = "content">
+	
+	<%System.out.println("jsp2"); %>
 		<section class="me-4">
-		<c:choose>
-			<c:when test="${student.f=='sj'}"></c:when>
-				<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（科目）</h2>
-			<c:otherwise>
-				<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（学生）</h2>
-			</c:otherwise>
-		</c:choose>
-		
-		<%-- <h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照</h2> --%>
+		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照</h2>
 		<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 		<form method="get" action="TestListSubjectExecute.action">
-			
 			<div class = "row align-items-center" id="filter">
 				<div class="col-4" style="width:15%;">科目情報</div>
 				<div class="col-4" style="width:15%;">
@@ -51,7 +44,7 @@
 						<%@page import="bean.Subject, java.util.List" %>
 						<% List<Subject> list=(List<Subject>)request.getAttribute("subjects");%>
 							<%for (Subject s : list){ %>
-								<option value="<%=s.getName()%>"><%=s.getName()%></option>
+								<option value="<%=s.getCd()%>"><%=s.getName()%></option>
 						<%}%>
 							<%-- <option value="${subject.cd}"<c:if test="${subject_name==f3}">selected</c:if>>${subject_name}</option> --%>
 						<%-- </c:forEach> --%>
@@ -62,7 +55,7 @@
 					<button class="btn btn-secondary" id="filter-button" onClick="TestListSubjectExecute.action">検索</button>
 				</div>
 				<div>
-					<Input value="${sj}" name="f" hidden></Input>
+					<Input value="sj" name="f" hidden></Input>
 				</div>
 			
 			<div class="mt-2 text-warning">${errors.get("subjectError")}</div>
@@ -80,17 +73,17 @@
 					<button class="btn btn-secondary" id="filter-button" onClick="TestListStudentExecute.action">検索</button>
 				</div>
 				<div>
-					<Input value="${st}" name="f" hidden></Input>
+					<Input value="st" name="f" hidden></Input>
 				</div>
 				
 			</div>
 		</form>
 		</div>
 		<!-- <p style="color:#18cbff;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p> -->
-		
+		<%System.out.println("jsp1"); %>
 		<c:choose>
-			<c:when test="${subject.size()>0 }">
-				<c:when test='${student.f=="sj"}'>
+			
+				<c:when test='${f=="sj"}'>
 					<div>科目：{subject_name}</div>
 					<div>検索結果：${subject.size() }件</div>
 					<table class="table table-hover">
@@ -134,19 +127,19 @@
 						<tr>
 							<td>${student.entYear}</td>
 							<td>${student.classNum}</td>
+							<td>${student.subjectname}</td>
 							<td>${student.no}</td>
-							<td>${student.Name}</td>
-							<td><input name="point_${学生番号}">${point}</input></td>
+							<td><input name="point_${学生番号}">${student.point}</td>
 							<td></td>
 							<td></td>
 						</tr>
 					</c:forEach>
 					</table>
 				</c:otherwise>
-			</c:when>
-			<c:otherwise>
+			
+			<%-- <c:otherwise>
 				<div>学生情報が存在しませんでした</div>
-			</c:otherwise>
+			</c:otherwise> --%>
 		</c:choose>
 		</section>		
 	</c:param>
