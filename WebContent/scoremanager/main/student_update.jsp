@@ -17,7 +17,7 @@
 					<p>　<Input readonly value="${ent_year}"name="ent_year" class="border border-0" style="left:10px;"hidden/>${ent_year}</p>
 					<p></p>
 					<%-- <%=request.setParameter("",request.getAttribute("ent_year")) %> --%>
-					
+
 				</div>
 				<div>
 				<%-- <% System.out.println(request.getParameter("class_num_set")); %>
@@ -31,7 +31,7 @@
 				<div>
 					<label class="form-label" for="student-f3-select">氏名</label>
 					<Input class="form-control" name="name"value="${name}"maxlength="30"required placeholder="氏名を入力してください"></Input>
-					
+
 					<%-- <div class="mt-2 text-warning">${errors3.get("name")}</div> --%>
 				</div>
 				<div>
@@ -49,13 +49,13 @@
 					<label class="form-label" >在学中</label>
 					<input type="checkbox" name="is_attend" ></input>
 				</div>
-				
+
 				<div>
 					<br>
 					<input type="submit" value="変更" class="btn btn-secondary" style="background-color:#0d6efd;">
 				</div>
 				<br>
-				<div><a href="./menu.jsp">戻る</a></div>
+				<div><a href="StudentList.action">戻る</a></div>
 			</div>
 		</form>
 		</section>
