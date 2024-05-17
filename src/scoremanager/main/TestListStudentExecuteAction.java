@@ -71,7 +71,7 @@ public class TestListStudentExecuteAction extends Action{
 			req.setAttribute("f", f);
 			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 		}catch(Exception e){
-			req.setAttribute("error", "truest");
+			req.setAttribute("error", "true");
 			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 		}
 	}

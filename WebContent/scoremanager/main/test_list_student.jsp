@@ -95,7 +95,7 @@
 					<div>氏名：${student_name}(${student_no})</div>
 					<div>成績情報が存在しませんでした</div>
 				</c:when>
-				<c:when test='${error=="truesj"}'>
+				<c:when test='${error=="true"}'>
 					<div>学生情報が存在しませんでした</div>
 				</c:when>
 				<c:when test='${f=="sj"}'>
