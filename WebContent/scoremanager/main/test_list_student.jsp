@@ -8,7 +8,15 @@
 	<c:param name = "scriipts">	</c:param>
 	<c:param name = "content">
 		<section class="me-4">
-		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照</h2>
+		<c:choose>
+				<c:when test='${f=="sj"}'>
+					<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（科目）</h2>					
+				</c:when>
+				<c:otherwise>
+					<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（学生）</h2>
+				</c:otherwise>
+		</c:choose>
+		
 		<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 		<form method="get" action="TestListSubjectExecute.action">
 			<div class = "row align-items-center" id="filter">
@@ -37,15 +45,19 @@
 					<label class="form-label"  for="student-f3-select">科目</label>
 					<select class="form-select"  id="student-f3-select"  name="f3">
 						<option value="0">--------</option>
-						<%-- <c:forEach var="num" items="${subjects}"> --%>
-							<%-- <%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
+						<%-- <c:forEach var="num" items="${subject_set}"> --%>
+						
+						
 						<%@page import="bean.Subject, java.util.List" %>
-						<% List<Subject> list=(List<Subject>)request.getAttribute("subjects");%>
+						<% List<Subject> list=(List<Subject>)request.getAttribute("subject_set");%>
 							<%for (Subject s : list){ %>
-								<option value="<%=s.getCd()%>"><%=s.getName()%></option>
+							<% request.setAttribute("chk",s.getCd());%>
+								<option value="<%=s.getCd()%>"<c:if test="${chk==f3}">selected</c:if>><%=s.getName()%></option>
 						<%}%>
-							<%-- <option value="${subject.cd}"<c:if test="${subject_name==f3}">selected</c:if>>${subject_name}</option> --%>
-						<%-- </c:forEach> --%>
+						
+						
+							<%-- <option value="${subject.cd}"<c:if test="${subject.name==f3}">selected</c:if>>${subject.name}</option>
+						</c:forEach> --%>
 					</select>
 					
 				</div>
@@ -79,11 +91,15 @@
 		</div>
 		<!-- <p style="color:#18cbff;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p> -->
 		<c:choose>
-				<c:when test='${error==true}'>
+				<c:when test='${error=="truest"}'>
+					<div>氏名：${student_name}(${student_no})</div>
+					<div>成績情報が存在しませんでした</div>
+				</c:when>
+				<c:when test='${error=="truesj"}'>
 					<div>学生情報が存在しませんでした</div>
 				</c:when>
 				<c:when test='${f=="sj"}'>
-					<div>科目：{subject_name}</div>
+					<div>科目：${subject_name}</div>
 					<table class="table table-hover">
 						<tr>
 							<th>入学年度</th>
@@ -95,7 +111,19 @@
 							<th></th>
 							<th></th>
 						</tr>
-						<c:forEach var="student" items="${students}">
+						<%@page import="bean.TestListSubject, java.util.List" %>
+						<tr>
+						<% List<TestListSubject> result=(List<TestListSubject>)request.getAttribute("subject_result");%>
+							<%for (TestListSubject r : result){ %>
+								<td><%=r.getEntYear()%></td>
+								<td><%=r.getClassNum()%></td>
+								<td><%=r.getStudentNo()%></td>
+								<td><%=r.getStudentName()%></td>
+								<td><%=r.getPoints()%></td>
+								<td><%=r.getPoints()%></td>
+							<%}%>
+						</tr>
+						<%-- <c:forEach var="student" items="${students}">
 							<tr>
 								<td>${student.entYear}</td>
 								<td>${student.classNum}</td>
@@ -106,7 +134,7 @@
 								<td></td>
 								<td></td>
 							</tr>
-						</c:forEach>
+						</c:forEach> --%>
 					</table>
 				</c:when>
 				<c:otherwise>
@@ -120,16 +148,26 @@
 							<th></th>
 							<th></th>
 						</tr>
-					<c:forEach var="student" items="${result}">
 						<tr>
-							<td>${result.subject_name}</td>
-							<td>${result.subject_code}</td>
-							<td>${result.no}</td>
-							<td><input name="point_${学生番号}">${result.point}</td>
+						<%@page import="bean.TestListStudent, java.util.List" %>
+						<% List<TestListStudent> result=(List<TestListStudent>)request.getAttribute("result");%>
+							<%for (TestListStudent r : result){ %>
+								<td><%=r.getSubjectName()%></td>
+								<td><%=r.getSubjectCd()%></td>
+								<td><%=r.getNum()%></td>
+								<td><%=r.getPoint()%></td>
+						<%}%>
+						</tr>
+					<%-- <c:forEach var="student" items="${result}">
+						<tr>
+							<td>${result.SubjectName}</td>
+							<td>${result.getSubjectCd}</td>
+							<td>${result.Num}</td>
+							<td><input name="point_${学生番号}">${result.Point}</td>
 							<td></td>
 							<td></td>
 						</tr>
-					</c:forEach>
+					</c:forEach> --%>
 					</table>
 				</c:otherwise>
 			

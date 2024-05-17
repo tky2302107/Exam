@@ -40,7 +40,7 @@
 						<%-- <c:forEach var="num" items="${subjects}"> --%>
 							<%-- <%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
 						<%@page import="bean.Subject, java.util.List" %>
-						<% List<Subject> list=(List<Subject>)request.getAttribute("subjects");%>
+						<% List<Subject> list=(List<Subject>)request.getAttribute("subject_set");%>
 							<%for (Subject s : list){ %>
 								<option value="<%=s.getCd()%>"><%=s.getName()%></option>
 						<%}%>
