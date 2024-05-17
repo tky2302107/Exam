@@ -37,21 +37,28 @@ public class TestListStudentExecuteAction extends Action{
 		Student number = StDao.get(no);
 		Map<String,String> errors =new HashMap<>();
 		
-		List<Subject> subjects = null;
+		List<Subject> subject_set = null;
 		SubjectDao SubDao = new SubjectDao();
-		subjects = SubDao.filter(teacher.getSchool());
-        req.setAttribute("subjects", subjects);
+		subject_set = SubDao.filter(teacher.getSchool());
+        req.setAttribute("subject_set", subject_set);
 		req.setAttribute("subject", A);
 		
 		System.out.println("result: "+result);
 		req.setAttribute("result", result);
-		
+		int cnt =0;
+		for (TestListStudent s : result){
+			cnt+=1;
+			System.out.println(cnt+": "+s.getSubjectName());
+			System.out.println(cnt+": "+s.getSubjectCd());
+			System.out.println(cnt+": "+s.getNum());
+			System.out.println(cnt+": "+s.getPoint());
+		}
 		req.setAttribute("f4", no);
 		req.setAttribute("error", "false");
 //		try{
 			req.setAttribute("student_name", number.getName());
 			req.setAttribute("student_no", number.getNo());
-			req.setAttribute("student_class", number.getClass());
+//			req.setAttribute("student_class", number.getClass());
 	//		req.setAttribute("student_no", number.getNo());
 	//		req.setAttribute("student_no", number.getNo());
 			req.setAttribute("f", f);

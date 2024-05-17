@@ -34,14 +34,14 @@ public class TestListAction extends Action{
 		int year = localDate.getYear();
 		List<String> class_num_list = null;
 		class_num_list = cDao.filter(teacher.getSchool());
-		List<Subject> subjects = null;
-		subjects = subjectDao.filter(teacher.getSchool());
+		List<Subject> subject_set = null;
+		subject_set = subjectDao.filter(teacher.getSchool());
 		List<Integer> entYearSet = new ArrayList<>();
 		for (int i = year - 10; i < year + 11; i++){
 			entYearSet.add(i);
 		}
 		req.setAttribute("class_num_set", class_num_list);
-		req.setAttribute("subjects", subjects);
+		req.setAttribute("subject_set", subject_set);
 		req.setAttribute("ent_year_set", entYearSet);
 		req.setAttribute("f", f);
 		if(f != null){

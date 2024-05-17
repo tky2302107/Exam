@@ -1,5 +1,7 @@
 package scoremanager.main;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +12,7 @@ import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import bean.TestListSubject;
+import dao.ClassNumDao;
 import dao.SubjectDao;
 import dao.TestListSubjectDao;
 import tool.Action;
@@ -45,10 +48,24 @@ public class TestListSubjectExecuteAction extends Action{
         req.setAttribute("f1", entYear);
         req.setAttribute("f2", classNum);
         req.setAttribute("f3", subject);
+        req.setAttribute("subject_name", subject0.getName());
         req.setAttribute("f", f);
-        List<Subject> subjects = null;
-		subjects = SubDao.filter(teacher.getSchool());
-        req.setAttribute("subjects", subjects);
+        List<Subject> subject_set = null;
+		subject_set = SubDao.filter(teacher.getSchool());
+		
+		LocalDate localDate = LocalDate.now();
+		int year = localDate.getYear();
+		ClassNumDao cDao = new ClassNumDao();
+		List<String> class_num_list = null;
+		class_num_list = cDao.filter(teacher.getSchool());
+		List<Integer> entYearSet = new ArrayList<>();
+		for (int i = year - 10; i < year + 11; i++){
+			entYearSet.add(i);
+		}
+		req.setAttribute("class_num_set", class_num_list); //選択項目
+		req.setAttribute("ent_year_set", entYearSet);
+        req.setAttribute("subject_set", subject_set);
+        
         req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
     }
 }
