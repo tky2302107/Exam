@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.School;
 import bean.Subject;
 import bean.Teacher;
 import bean.TestListSubject;
@@ -39,17 +38,9 @@ public class TestListSubjectExecuteAction extends Action{
         
         
 		Subject subject0 = SubDao.get(subject, teacher.getSchool());
-        School school = null;
-		List<TestListSubject> Subject1 = TLSD.filter(entYear, classNum, subject0, school);
-        System.out.println(Subject1);
+		List<TestListSubject> subject_result = TLSD.filter(entYear, classNum, subject0, teacher.getSchool());
         
         
-        req.setAttribute("subject", Subject1);
-        req.setAttribute("f1", entYear);
-        req.setAttribute("f2", classNum);
-        req.setAttribute("f3", subject);
-        req.setAttribute("subject_name", subject0.getName());
-        req.setAttribute("f", f);
         List<Subject> subject_set = null;
 		subject_set = SubDao.filter(teacher.getSchool());
 		
@@ -62,10 +53,28 @@ public class TestListSubjectExecuteAction extends Action{
 		for (int i = year - 10; i < year + 11; i++){
 			entYearSet.add(i);
 		}
-		req.setAttribute("class_num_set", class_num_list); //選択項目
-		req.setAttribute("ent_year_set", entYearSet);
-        req.setAttribute("subject_set", subject_set);
-        
+		try{
+			for (TestListSubject r : subject_result){
+				System.out.println(":"+r.getStudentName()+":");
+				if ((r.getStudentName().equals("")) || (r.getStudentName()==null) || (r.getStudentName().length()==0)){
+					req.setAttribute("error", "truesj");
+					req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+				}
+				
+			}
+			req.setAttribute("subject_result", subject_result);
+	        req.setAttribute("f1", entYear);
+	        req.setAttribute("f2", classNum);
+	        req.setAttribute("f3", subject);
+	        req.setAttribute("subject_name", subject0.getName());
+	        req.setAttribute("f", f);
+			req.setAttribute("class_num_set", class_num_list); //選択項目
+			req.setAttribute("ent_year_set", entYearSet);
+			req.setAttribute("subject_set", subject_set);
+		}catch(Exception e){
+			req.setAttribute("error", "truesj");
+			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+		}
         req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
     }
 }

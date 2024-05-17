@@ -8,7 +8,15 @@
 	<c:param name = "scriipts">	</c:param>
 	<c:param name = "content">
 		<section class="me-4">
-		<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照</h2>
+		<c:choose>
+				<c:when test='${f=="sj"}'>
+					<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（科目）</h2>					
+				</c:when>
+				<c:otherwise>
+					<h2 class="h3 mb-3 fw-norma bg-opacity-10 py-2 px-4" style="background-color:#f0f1f2;">成績参照（学生）</h2>
+				</c:otherwise>
+		</c:choose>
+		
 		<div class = "row border mx-3 mb-3 py-2 align-items-center rounded" id = "filter">
 		<form method="get" action="TestListSubjectExecute.action">
 			<div class = "row align-items-center" id="filter">
@@ -83,7 +91,11 @@
 		</div>
 		<!-- <p style="color:#18cbff;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p> -->
 		<c:choose>
-				<c:when test='${error==true}'>
+				<c:when test='${error=="truest"}'>
+					<div>氏名：${student_name}(${student_no})</div>
+					<div>成績情報が存在しませんでした</div>
+				</c:when>
+				<c:when test='${error=="truesj"}'>
 					<div>学生情報が存在しませんでした</div>
 				</c:when>
 				<c:when test='${f=="sj"}'>
@@ -99,7 +111,19 @@
 							<th></th>
 							<th></th>
 						</tr>
-						<c:forEach var="student" items="${students}">
+						<%@page import="bean.TestListSubject, java.util.List" %>
+						<tr>
+						<% List<TestListSubject> result=(List<TestListSubject>)request.getAttribute("subject_result");%>
+							<%for (TestListSubject r : result){ %>
+								<td><%=r.getEntYear()%></td>
+								<td><%=r.getClassNum()%></td>
+								<td><%=r.getStudentNo()%></td>
+								<td><%=r.getStudentName()%></td>
+								<td><%=r.getPoints()%></td>
+								<td><%=r.getPoints()%></td>
+							<%}%>
+						</tr>
+						<%-- <c:forEach var="student" items="${students}">
 							<tr>
 								<td>${student.entYear}</td>
 								<td>${student.classNum}</td>
@@ -110,7 +134,7 @@
 								<td></td>
 								<td></td>
 							</tr>
-						</c:forEach>
+						</c:forEach> --%>
 					</table>
 				</c:when>
 				<c:otherwise>

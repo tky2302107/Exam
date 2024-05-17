@@ -1,6 +1,7 @@
 
 package scoremanager.main;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import bean.Student;
 import bean.Subject;
 import bean.Teacher;
 import bean.TestListStudent;
+import dao.ClassNumDao;
 import dao.StudentDao;
 import dao.SubjectDao;
 import dao.TestListStudentDao;
@@ -39,34 +41,39 @@ public class TestListStudentExecuteAction extends Action{
 		
 		List<Subject> subject_set = null;
 		SubjectDao SubDao = new SubjectDao();
+		
+		LocalDate localDate = LocalDate.now();
+		int year = localDate.getYear();
+		ClassNumDao cDao = new ClassNumDao();
+		List<String> class_num_list = null;
+		class_num_list = cDao.filter(teacher.getSchool());
+		List<Integer> entYearSet = new ArrayList<>();
+		for (int i = year - 10; i < year + 11; i++){
+			entYearSet.add(i);
+		}
 		subject_set = SubDao.filter(teacher.getSchool());
+		req.setAttribute("class_num_set", class_num_list); //選択項目
+		req.setAttribute("ent_year_set", entYearSet);
         req.setAttribute("subject_set", subject_set);
 		req.setAttribute("subject", A);
-		
-		System.out.println("result: "+result);
 		req.setAttribute("result", result);
-		int cnt =0;
-		for (TestListStudent s : result){
-			cnt+=1;
-			System.out.println(cnt+": "+s.getSubjectName());
-			System.out.println(cnt+": "+s.getSubjectCd());
-			System.out.println(cnt+": "+s.getNum());
-			System.out.println(cnt+": "+s.getPoint());
-		}
 		req.setAttribute("f4", no);
 		req.setAttribute("error", "false");
-//		try{
+		try{
 			req.setAttribute("student_name", number.getName());
 			req.setAttribute("student_no", number.getNo());
+			if (result == null){
+				req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+			}
 //			req.setAttribute("student_class", number.getClass());
 	//		req.setAttribute("student_no", number.getNo());
 	//		req.setAttribute("student_no", number.getNo());
 			req.setAttribute("f", f);
 			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
-//		}catch(Exception e){
-//			req.setAttribute("error", "true");
-//			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
-//		}
+		}catch(Exception e){
+			req.setAttribute("error", "truest");
+			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+		}
 	}
 	
 
