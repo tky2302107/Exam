@@ -45,19 +45,12 @@
 					<label class="form-label"  for="student-f3-select">科目</label>
 					<select class="form-select"  id="student-f3-select"  name="f3">
 						<option value="0">--------</option>
-						<%-- <c:forEach var="num" items="${subject_set}"> --%>
-						
-						
 						<%@page import="bean.Subject, java.util.List" %>
 						<% List<Subject> list=(List<Subject>)request.getAttribute("subject_set");%>
 							<%for (Subject s : list){ %>
 							<% request.setAttribute("chk",s.getCd());%>
 								<option value="<%=s.getCd()%>"<c:if test="${chk==f3}">selected</c:if>><%=s.getName()%></option>
 						<%}%>
-						
-						
-							<%-- <option value="${subject.cd}"<c:if test="${subject.name==f3}">selected</c:if>>${subject.name}</option>
-						</c:forEach> --%>
 					</select>
 					
 				</div>
@@ -67,8 +60,6 @@
 				<div>
 					<Input value="sj" name="f" hidden></Input>
 				</div>
-			
-			<div class="mt-2 text-warning">${errors.get("subjectError")}</div>
 			</div>
 			</form>
 			<HR>
@@ -89,7 +80,6 @@
 			</div>
 		</form>
 		</div>
-		<!-- <p style="color:#18cbff;">科目情報を選択または学生情報を入力して検索ボタンをクリックしてください</p> -->
 		<c:choose>
 				<c:when test='${error=="truest"}'>
 					<div>氏名：${student_name}(${student_no})</div>
@@ -123,21 +113,9 @@
 								<td><%=r.getPoints()%></td>
 							<%}%>
 						</tr>
-						<%-- <c:forEach var="student" items="${students}">
-							<tr>
-								<td>${student.entYear}</td>
-								<td>${student.classNum}</td>
-								<td>${student.no}</td>
-								<td>${student.Name}</td>
-								<td>${once}</td>
-								<td>${twice}</td>
-								<td></td>
-								<td></td>
-							</tr>
-						</c:forEach> --%>
 					</table>
 				</c:when>
-				<c:otherwise>
+				<c:when test='${f=="st"}'>
 					<div>氏名：${student_name}(${student_no})</div>
 					<table class="table table-hover">
 						<tr>
@@ -158,19 +136,10 @@
 								<td><%=r.getPoint()%></td>
 						<%}%>
 						</tr>
-					<%-- <c:forEach var="student" items="${result}">
-						<tr>
-							<td>${result.SubjectName}</td>
-							<td>${result.getSubjectCd}</td>
-							<td>${result.Num}</td>
-							<td><input name="point_${学生番号}">${result.Point}</td>
-							<td></td>
-							<td></td>
-						</tr>
-					</c:forEach> --%>
-					</table>
+						</table>
+				</c:when>
+				<c:otherwise>
 				</c:otherwise>
-			
 		</c:choose>
 		</section>		
 	</c:param>

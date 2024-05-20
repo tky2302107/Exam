@@ -37,15 +37,11 @@
 					<label class="form-label"  for="student-f3-select">科目</label>
 					<select class="form-select"  id="student-f3-select"  name="f3">
 						<option value="0">--------</option>
-						<%-- <c:forEach var="num" items="${subjects}"> --%>
-							<%-- <%-- 現在のnumと選択されていたf2が一致していた場合にselectedを追記 --%>
 						<%@page import="bean.Subject, java.util.List" %>
 						<% List<Subject> list=(List<Subject>)request.getAttribute("subject_set");%>
 							<%for (Subject s : list){ %>
 								<option value="<%=s.getCd()%>"><%=s.getName()%></option>
 						<%}%>
-							<%-- <option value="${subject.cd}"<c:if test="${subject_name==f3}">selected</c:if>>${subject_name}</option> --%>
-						<%-- </c:forEach> --%>
 					</select>
 					
 				</div>
@@ -55,10 +51,10 @@
 				<div>
 					<Input value="sj" name="f" hidden></Input>
 				</div>
-				<c:if test="${not empty errors}">
-					<p class="mt-2 text-warning">${errors.get("empty")}</p>
+				<c:if test="${errorsnull.length()>0}">
+					<div><font color="#ffd45a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					入学年度とクラスと科目を選択してください</font></div>
 				</c:if>
-			<%-- <div class="mt-2 text-warning">${errors.get("e1")}</div> --%>
 			</div>
 			</form>
 			<HR>

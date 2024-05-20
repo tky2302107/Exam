@@ -62,14 +62,13 @@ public class TestListStudentExecuteAction extends Action{
 		try{
 			req.setAttribute("student_name", number.getName());
 			req.setAttribute("student_no", number.getNo());
-			if (result == null){
+			req.setAttribute("f", f);
+			if (result.size()==0){
+				req.setAttribute("error", "truest");
+				req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
+			}else{
 				req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 			}
-//			req.setAttribute("student_class", number.getClass());
-	//		req.setAttribute("student_no", number.getNo());
-	//		req.setAttribute("student_no", number.getNo());
-			req.setAttribute("f", f);
-			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
 		}catch(Exception e){
 			req.setAttribute("error", "true");
 			req.getRequestDispatcher("test_list_student.jsp").forward(req, res);
