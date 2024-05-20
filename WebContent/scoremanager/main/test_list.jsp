@@ -55,8 +55,10 @@
 				<div>
 					<Input value="sj" name="f" hidden></Input>
 				</div>
-			
-			<div class="mt-2 text-warning">${errors.get("e1")}</div>
+				<c:if test="${not empty errors}">
+					<p class="mt-2 text-warning">${errors.get("empty")}</p>
+				</c:if>
+			<%-- <div class="mt-2 text-warning">${errors.get("e1")}</div> --%>
 			</div>
 			</form>
 			<HR>
