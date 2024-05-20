@@ -16,7 +16,7 @@
 				<p><Input readonly value="${subject.cd}" name="cd" class="border border-0"hidden/>${subject.cd}</p>
 				<br>
 				<label>科目名</label>
-				<Input class="form-control" name="name" value="${name}"maxlength="10"required placeholder="科目名を入力してください" ></Input>
+				<Input class="form-control" name="name" value="${subject.name}"maxlength="10"></Input>
 				<br>
 				<div class="mb-3">
 					<input type="submit" class="btn btn-primary" value="登録">
