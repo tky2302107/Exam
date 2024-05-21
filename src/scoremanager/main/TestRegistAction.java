@@ -41,6 +41,7 @@ public class TestRegistAction extends Action{
 		int num = 0;
 		Subject subject = new Subject();
 		SubjectDao subjectDao = new SubjectDao();
+		StudentDao studentDao =new StudentDao();
 		entYear = Integer.parseInt(req.getParameter("f1"));
 		classNum = req.getParameter("f2");
 		subject_cd = req.getParameter("f3");
@@ -50,33 +51,84 @@ public class TestRegistAction extends Action{
 		req.setAttribute("f3", subject_cd);
 		req.setAttribute("f4", num);
 		if(entYear != 0 && classNum != null && subject_cd != null && num != 0){
-			StudentDao sDao = new StudentDao();
 			TestDao tDao = new TestDao();
-			List<Test> list = new ArrayList<>();
+			List<Test> test_result = new ArrayList<>();
 			subject = subjectDao.get(subject_cd, teacher.getSchool());
-			list = tDao.filter(entYear,classNum,subject,num,teacher.getSchool());
-			req.setAttribute("subject_name", subject.getName());
-			req.setAttribute("req", "update");
-			req.setAttribute("student_list", list);
-			List<Student> list2 = new ArrayList<Student>();
-			list2 = sDao.filter(teacher.getSchool(),entYear,classNum,true);
-			if(list == null){
-				req.setAttribute("student_list", list2);
-				req.getRequestDispatcher("test_regist_create.jsp").forward(req, res);;
-				return;
-			}else{
-				if (list.size() < list2.size()) {
-					for(Test t : list){
-						req.setAttribute("point_" + t.getStudent().getNo(),t.getPoint());
-					}
-					req.setAttribute("student_list", list2);
-					req.getRequestDispatcher("test_regist_create.jsp").forward(req, res);
-					return;
-				}else{
-				req.getRequestDispatcher("test_regist_update.jsp").forward(req, res);
-				return;
-				}
+			test_result = tDao.filter(entYear,classNum,subject,num,teacher.getSchool());
+			List<Student> student_data = studentDao.filter(teacher.getSchool(), entYear, classNum,true);
+			/*List<String> cnlist = new ArrayList<>();
+			List<Integer> eylist = new ArrayList<>();
+			List<String> nalist = new ArrayList<>();
+			List<String> nolist = new ArrayList<>();
+			List<String> sclist = new ArrayList<>();
+			List<String> sylist = new ArrayList<>();*/
+			/*Map<String ,Integer> map = new HashMap<>();
+			for (Test t : test_result){
+				map.put(t.getNo(), t.getPoint());
+				
+			}*/
+//			System.out.println(map);
+			
+			List<String> no_tf = new ArrayList<>();
+			List<Integer> point = new ArrayList<>();
+			for (Test t : test_result){
+				no_tf.add(t.getStudent().getNo());
+				
+				point.add(t.getPoint());
+
 			}
+			System.out.println("Point:"+point);
+			/*for (Student s :student_data){
+				cnlist.add(s.getClassNum());
+				eylist.add(s.getEntYear());
+				nalist.add(s.getName());
+				nolist.add(s.getNo());
+				sclist.add(String.valueOf(s.getSchool()));
+				sylist.add(String.valueOf(s.getSchoolYear()));
+			}*/
+			
+			
+			req.setAttribute("student_list", student_data);
+			req.setAttribute("test_result", test_result);
+			req.setAttribute("subject_name", subject.getName());
+//			System.out.println(test_result);
+			req.setAttribute("no_tf", no_tf);
+			req.setAttribute("pointlist", point);
+//			req.setAttribute("student_list", student_list);
+//			req.setAttribute("student_list", student_list);
+//			req.setAttribute("student_list", student_list);
+			req.getRequestDispatcher("test_regist.jsp").forward(req, res);;
+			
+//			Student students = new Student();
+			
+//			students.setClassNum("");
+//			students.setEntYear(entYear);
+//			students.setName(list.get);
+//			students.setNo(no);
+			
+//			req.setAttribute("subject_name", subject.getName());
+//			req.setAttribute("req", "update");
+//			req.setAttribute("test_result", test_result);
+//			/*req.setAttribute("student_list", test_result);*/
+//			List<Student> student_list = new ArrayList<Student>();
+//			student_list = sDao.filter(teacher.getSchool(),entYear,classNum,true);
+//			if(test_result == null){
+//				req.setAttribute("student_list", student_list);
+//				req.getRequestDispatcher("test_regist.jsp").forward(req, res);;
+//				return;
+//			}else{
+//				if (test_result.size() < student_list.size()) {
+//					for(Test t : test_result){
+//						req.setAttribute("point_" + t.getStudent().getNo(),t.getPoint());
+//					}
+//					req.setAttribute("student_list", student_list);
+//					req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+//					return;
+//				}else{
+//				req.getRequestDispatcher("test_regist.jsp").forward(req, res);
+//				return;
+//				}
+//			}
 
 		}else{
 			req.setAttribute("error", "入学年度とクラスと科目と回数を選択してください。");

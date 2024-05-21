@@ -102,17 +102,27 @@
 							<th></th>
 						</tr>
 						<%@page import="bean.TestListSubject, java.util.List" %>
-						<tr>
+						
 						<% List<TestListSubject> result=(List<TestListSubject>)request.getAttribute("subject_result");%>
 							<%for (TestListSubject r : result){ %>
+							<tr>
 								<td><%=r.getEntYear()%></td>
 								<td><%=r.getClassNum()%></td>
 								<td><%=r.getStudentNo()%></td>
 								<td><%=r.getStudentName()%></td>
-								<td><%=r.getPoints()%></td>
-								<td><%=r.getPoints()%></td>
+								<%if (r.getPoints().get(1)==null){ %>
+								<td>-</td>
+								<% }else{%>
+								<td><%=r.getPoints().get(1)%></td>
+								<%} %>
+								<%if (r.getPoints().get(2)==null){ %>
+								<td>-</td>
+								<% }else{%>
+								<td><%=r.getPoints().get(2)%></td>
+								<%} %>
+							</tr>
 							<%}%>
-						</tr>
+						
 					</table>
 				</c:when>
 				<c:when test='${f=="st"}'>
@@ -126,16 +136,18 @@
 							<th></th>
 							<th></th>
 						</tr>
-						<tr>
+						
 						<%@page import="bean.TestListStudent, java.util.List" %>
 						<% List<TestListStudent> result=(List<TestListStudent>)request.getAttribute("result");%>
 							<%for (TestListStudent r : result){ %>
+								<tr>
 								<td><%=r.getSubjectName()%></td>
 								<td><%=r.getSubjectCd()%></td>
 								<td><%=r.getNum()%></td>
 								<td><%=r.getPoint()%></td>
+								</tr>
 						<%}%>
-						</tr>
+						
 						</table>
 				</c:when>
 				<c:otherwise>

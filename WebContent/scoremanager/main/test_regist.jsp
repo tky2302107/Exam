@@ -82,10 +82,12 @@
 				}
 		</script>
 		
-		<c:choose>
-			<c:when test="${subject.size()>0 }">
-				<div>科目：{subject_name}</div>
-				<div>検索結果：${subject.size() }件</div>
+		<%-- <c:choose>
+			<c:when test="${list.size()>0 }"> --%>
+			<c:if test="${student_list.size()>0}">
+				<form method="get" action="TestRegistExecute.action">
+				<div>科目：${subject_name}</div>
+				<div>検索結果：${student_list.size() }件</div>
 				<table class="table table-hover">
 					<tr>
 						<th>入学年度</th>
@@ -96,24 +98,80 @@
 						<th></th>
 						<th></th>
 					</tr>
-					<c:forEach var="student" items="${students}">
-						<tr>
-							<td>${student.entYear}</td>
-							<td>${student.classNum}</td>
-							<td>${student.no}</td>
-							<td>${student.Name}</td>
-							<td><input name="point_${学生番号}"></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</c:forEach>
+					<c:choose>
+						<c:when test="">
+							<c:forEach var="list" items="${student_list}">
+									<td>${list.entYear}</td>
+									<td>${list.no}</td>
+									<td>${list.name}</td>
+									<td>${list.classNum}</td>
+									<td><input value="" ></td>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							
+								<%@page import="bean.Test,bean.Student, java.util.List, java.util.ArrayList,java.util.Arrays" %>
+								<% List<Test> result=(List<Test>)request.getAttribute("test_result");%>
+								<% List<Student> list=(List<Student>)request.getAttribute("student_list");%>
+								<% List<String> no_tf=(List<String>)request.getAttribute("no_tf");%>
+								<% List<String> pl=(List<String>)request.getAttribute("pointlist");%>
+								<% Integer cnt=0; %>
+								
+								<%for (Student s : list){ %>
+								
+									<tr>
+										<td><%=s.getEntYear()%></td>
+										<td><%=s.getClassNum()%></td>
+										<td><%=s.getNo()%></td>
+										<td><%=s.getName()%></td>
+										<%-- <td><%=result.get(cnt).getStudent().getClassNum()%></td>
+										<td><%=result.get(cnt).getStudent().getNo()%></td>
+										<td><%=result.get(cnt).getStudent().getName()%></td> --%>
+										
+										<%if (no_tf.contains(s.getNo())==true){%>
+											<td><input value=""></td>	<%-- <%=pl.get(cnt)%> --%>
+											<td>!</td>
+											<%cnt++; %>
+										<% }else{ %>
+											<td><input value=""></td>
+										<% } %>
+									</tr>
+									
+									<%-- <%=result.get().getPoint()%> --%>
+									
+									<!-- r.getPoint() -->
+									<%-- <td><input <%if (Arrays.asList(no_tf).contains(result.get(cnt).getStudent().getNo())){%> value="<%=result.get(cnt).getStudent().getNo()%>" <% } %>></td> --%>
+									<%-- <%for (Student s : list){ %>
+										<tr>	
+										<%count++; %>
+										<td><%=r.getSubjectName()%></td>
+										<td><%=s.getEntYear()%></td>
+										<td><%=s.getNo()%></td>
+										<td><%=s.getName()%></td>
+										<td><%=s.getClassNum()%></td>  <!-- result.getPoint() -->
+										<td><input <%if (Arrays.asList(no_tf).contains(s.getNo())){%> value="<%=count%>" <% } %>></td>
+										</tr> --%>
+									<%-- <c:forEach var="list" items="${student_list}">
+										<tr>
+										<td>${list.entYear}</td>
+										<td>${list.no}</td>
+										<td>${list.name}</td>
+										<td>${list.classNum}</td>${list.no in no_tf}
+										
+										<td><input <c:if test="${Arrays.asList(no_tf).contains(list.co)}">value="<%=r.getPoint()%>"</c:if>></td>
+										</tr>
+									</c:forEach> --%>
+									<% } %>	
+								<%-- <% } %> --%>
+							
+						</c:otherwise>
+					</c:choose>
 				</table>
-					<input type="submit" value="登録して終了" class="btn btn-secondary">
-			</c:when>
-			<c:otherwise>
-				<div>成績情報が存在しませんでした</div>
-			</c:otherwise>			
-		</c:choose>
-		
+					<div><input type="submit" value="登録して終了" class="btn btn-secondary"></div>
+				</form>
+				
+			<%-- </c:when>
+		</c:choose> --%>
+		</c:if>
 	</c:param>
 </c:import>
