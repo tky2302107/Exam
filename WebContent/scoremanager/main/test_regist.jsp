@@ -10,9 +10,10 @@
 	<c:param name="scripts"></c:param>
 
 	<c:param name="content">
+	<form method="get">
 		<section class="me-4">
 			<h2 class="h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4">成績管理</h2>
-				<form method="get" action="TestRegist.action">
+				
 					<div class="row border mx-3 mb-1 py-2 align-items-center rounded" id="filter">
 						<div class="col-10">
 							<table class="table table-borderless table-sm">
@@ -64,10 +65,11 @@
 						</div>
 						<div class="col-2 text-center">
 							<button class="btn btn-secondary" id="filter-button">検索</button>
+							<button class="btn btn-secondary" id="filter-button" onclick="TestRegist.action">遷移</button>
 						</div>
 						<div class="mt-2 text-warning">${error}</div>
 					</div>
-				</form>
+				<!-- </form> -->
 		</section>
 		<script>
 				function validateInput(input) {
@@ -82,10 +84,14 @@
 				}
 		</script>
 		
-		<%-- <c:choose>
-			<c:when test="${list.size()>0 }"> --%>
 			<c:if test="${student_list.size()>0}">
-				<form method="get" action="TestRegistExecute.action">
+			
+					<%@page import="bean.Test,bean.Student, java.util.List, java.util.ArrayList,java.util.Arrays,java.util.Map" %>
+								<% List<Test> result=(List<Test>)request.getAttribute("test_result");%>
+								<% List<Student> list=(List<Student>)request.getAttribute("student_list");%>
+								<% Map<String,String> npl=(Map<String,String>)request.getAttribute("newpointlist");%>
+								<% Integer cnt=0; %>
+				<!-- <form method="get" action="TestRegistExecute.action"> -->
 				<div>科目：${subject_name}</div>
 				<div>検索結果：${student_list.size() }件</div>
 				<table class="table table-hover">
@@ -99,79 +105,47 @@
 						<th></th>
 					</tr>
 					<c:choose>
-						<c:when test="">
+						<c:when test="${chk_flg=='true'}">
 							<c:forEach var="list" items="${student_list}">
+								<tr>
 									<td>${list.entYear}</td>
+									<td>${list.classNum}</td>
 									<td>${list.no}</td>
 									<td>${list.name}</td>
-									<td>${list.classNum}</td>
-									<td><input value="" ></td>
+									<td><input name="point_${list.no}" value="" ></td>
+								</tr>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
-							
-								<%@page import="bean.Test,bean.Student, java.util.List, java.util.ArrayList,java.util.Arrays" %>
-								<% List<Test> result=(List<Test>)request.getAttribute("test_result");%>
-								<% List<Student> list=(List<Student>)request.getAttribute("student_list");%>
-								<% List<String> no_tf=(List<String>)request.getAttribute("no_tf");%>
-								<% List<String> pl=(List<String>)request.getAttribute("pointlist");%>
-								<% Integer cnt=0; %>
-								
-								<%for (Student s : list){ %>
-								
-									<tr>
-										<td><%=s.getEntYear()%></td>
-										<td><%=s.getClassNum()%></td>
-										<td><%=s.getNo()%></td>
-										<td><%=s.getName()%></td>
-										<%-- <td><%=result.get(cnt).getStudent().getClassNum()%></td>
-										<td><%=result.get(cnt).getStudent().getNo()%></td>
-										<td><%=result.get(cnt).getStudent().getName()%></td> --%>
-										
-										<%if (no_tf.contains(s.getNo())==true){%>
-											<td><input value=""></td>	<%-- <%=pl.get(cnt)%> --%>
-											<td>!</td>
-											<%cnt++; %>
-										<% }else{ %>
-											<td><input value=""></td>
-										<% } %>
-									</tr>
+							<%for (Student s : list){ %>
+								<tr>
+									<td><%=s.getEntYear()%></td>
+									<td><%=s.getClassNum()%></td>
+									<td><%=s.getNo()%></td>
+									<td><%=s.getName()%></td>
 									
-									<%-- <%=result.get().getPoint()%> --%>
-									
-									<!-- r.getPoint() -->
-									<%-- <td><input <%if (Arrays.asList(no_tf).contains(result.get(cnt).getStudent().getNo())){%> value="<%=result.get(cnt).getStudent().getNo()%>" <% } %>></td> --%>
-									<%-- <%for (Student s : list){ %>
-										<tr>	
-										<%count++; %>
-										<td><%=r.getSubjectName()%></td>
-										<td><%=s.getEntYear()%></td>
-										<td><%=s.getNo()%></td>
-										<td><%=s.getName()%></td>
-										<td><%=s.getClassNum()%></td>  <!-- result.getPoint() -->
-										<td><input <%if (Arrays.asList(no_tf).contains(s.getNo())){%> value="<%=count%>" <% } %>></td>
-										</tr> --%>
-									<%-- <c:forEach var="list" items="${student_list}">
-										<tr>
-										<td>${list.entYear}</td>
-										<td>${list.no}</td>
-										<td>${list.name}</td>
-										<td>${list.classNum}</td>${list.no in no_tf}
-										
-										<td><input <c:if test="${Arrays.asList(no_tf).contains(list.co)}">value="<%=r.getPoint()%>"</c:if>></td>
-										</tr>
-									</c:forEach> --%>
-									<% } %>	
-								<%-- <% } %> --%>
-							
+									<%if (npl.containsKey(s.getNo())==true){%>
+										<%request.setAttribute("pointset",npl.get(s.getNo())); %>
+										<td><input name="point_${s.getNo()}" value="${pointset}"></td>
+										<%cnt++; %>
+									<% }else{ %>
+										<td><input name="point_${s.getNo()}" value=""></td>
+									<% } %>
+								</tr>
+								<% } %>
 						</c:otherwise>
 					</c:choose>
 				</table>
 					<div><input type="submit" value="登録して終了" class="btn btn-secondary"></div>
-				</form>
-				
-			<%-- </c:when>
-		</c:choose> --%>
-		</c:if>
+					<div><button class="btn btn-secondary" onclick="location.href='TestRegistExecute.action'">遷移</button></div>
+					<%	List<String> ret = new ArrayList<>();
+						for(Student s: list){
+							ret.add(s.getNo());
+						} 
+						request.setAttribute("ret",ret);
+					%>
+			</c:if>
+		</form>
+		
 	</c:param>
 </c:import>
