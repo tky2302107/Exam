@@ -64,8 +64,8 @@
 							</table>
 						</div>
 						<div class="col-2 text-center">
-							<button class="btn btn-secondary" id="filter-button">検索</button>
-							<button class="btn btn-secondary" id="filter-button" onclick="TestRegist.action">遷移</button>
+							<button class="btn btn-secondary" id="filter-button" formaction="TestRegist.action">検索</button>
+							<!-- <button class="btn btn-secondary" id="filter-button" onclick="TestRegist.action">遷移</button> -->
 						</div>
 						<div class="mt-2 text-warning">${error}</div>
 					</div>
@@ -136,8 +136,7 @@
 						</c:otherwise>
 					</c:choose>
 				</table>
-					<div><input type="submit" value="登録して終了" class="btn btn-secondary"></div>
-					<div><button class="btn btn-secondary" onclick="location.href='TestRegistExecute.action'">遷移</button></div>
+					<div><input name="e" type="submit" formaction="TestRegistExecute.action" value="登録して終了" class="btn btn-secondary"></div>
 					<%	List<String> ret = new ArrayList<>();
 						for(Student s: list){
 							ret.add(s.getNo());
