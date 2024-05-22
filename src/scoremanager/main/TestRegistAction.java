@@ -80,6 +80,12 @@ public class TestRegistAction extends Action{
 	        	chk_flg="true";
 	        }
 	        System.out.println(map);
+	        List<String> meibo = new ArrayList<>();
+	        for (Test tt :test_result){
+	        	meibo.add(tt.getStudent().getNo());
+	        }
+	        System.out.println("m0"+meibo);
+	        req.setAttribute("meibo", meibo);
 	        req.setAttribute("chk_flg", chk_flg);
 			req.setAttribute("student_list", student_data);
 			req.setAttribute("test_result", test_result);

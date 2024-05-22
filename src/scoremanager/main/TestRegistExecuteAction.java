@@ -39,9 +39,12 @@ public class TestRegistExecuteAction extends Action{
 		req.setAttribute("f2", classNum);
 		req.setAttribute("f3", subject_cd);
 		req.setAttribute("f4", num);
+		List<String> meibo = new ArrayList<>(); 
+		meibo = (List<String>) req.getAttribute("meibo");
+		System.out.println("m"+meibo);
 		
 		List<String> ret = (List<String>) req.getAttribute("ret");
-		/*List<String> list = Arrays.asList( "-1" , "2", "3", "4", "5" );*/
+		System.out.println("r"+ret);
 		 
         List<Integer> newret = new ArrayList<>();
         for (String s : ret) {

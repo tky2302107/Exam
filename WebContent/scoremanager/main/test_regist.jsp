@@ -117,7 +117,9 @@
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
+							<%-- <%List<String> meibo = new ArrayList<>(); %> --%>
 							<%for (Student s : list){ %>
+								<%-- <%meibo.add(s.getNo()); %> --%>
 								<tr>
 									<td><%=s.getEntYear()%></td>
 									<td><%=s.getClassNum()%></td>
@@ -132,7 +134,9 @@
 										<td><input name="point_${s.getNo()}" value=""></td>
 									<% } %>
 								</tr>
+								
 								<% } %>
+							<%request.setAttribute("meibo",request.getParameter("meibo")); %>
 						</c:otherwise>
 					</c:choose>
 				</table>
